@@ -5,7 +5,7 @@ sudo echo "Thank you."
 apt-get install sysstat nodejs npm python3-pip
 # Pip packages
 pip3 install requests flask flask_cors uwsgi
-# Angular
-npm install -g @angular/cli > /dev/null
+# Angular (Currently handled as local package, uncheck below to change this)
+# npm install -g @angular/cli > /dev/null
 # Node dependencies
 npm --prefix ./frontend install ./frontend
