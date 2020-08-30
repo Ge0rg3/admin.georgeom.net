@@ -1,7 +1,9 @@
+import os
 from flask import Blueprint, request
 
 # Setup module
 login_module = Blueprint('login_module', __name__)
+HOME_FILEPATH = os.path.dirname(os.path.realpath(__file__)) + "/../"
 
 
 @login_module.route("/login", methods=["POST"])
@@ -16,7 +18,7 @@ def login():
             "error": "Missing required parameter 'password'."
         }
     # Get password from file (yes, I know, don't say it.)
-    with open("auth/password.txt", "r") as f:
+    with open(HOME_FILEPATH + "auth/password.txt", "r") as f:
         password = f.read().strip()
     # Check password (hashing is for losers)
     if password_request != password:
@@ -25,7 +27,7 @@ def login():
             "error": "Invalid password"
         }, 400
     # Get auth token from file
-    with open("auth/token.txt", "r") as f:
+    with open(HOME_FILEPATH + "auth/token.txt", "r") as f:
         token = f.read()
     return {
         "status": 200,

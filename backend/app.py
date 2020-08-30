@@ -1,8 +1,8 @@
+import os
 from string import ascii_uppercase, digits
 from random import choice
 from flask import Flask, request, send_from_directory
 from flask_cors import CORS
-from os import listdir
 
 # Route imports
 from routes.ls import ls_module
@@ -16,20 +16,21 @@ APP_ROOT = "/api"
 app = Flask(__name__, template_folder="views", static_folder="views/static")
 app.config["APPLICATION_ROOT"] = APP_ROOT
 CORS(app)
+SCRIPT_FILEPATH = os.path.dirname(os.path.realpath(__file__))
 
 # Check password exists, and create if not
 try:
-    f = open("auth/password.txt", "r")
+    f = open(SCRIPT_FILEPATH + "/auth/password.txt", "r")
     f.close()
 except FileNotFoundError:
     password = input("Enter password: ")
-    with open("auth/password.txt", "w") as f:
+    with open(SCRIPT_FILEPATH + "/auth/password.txt", "w") as f:
         f.write(password)
 # Generate auth token
 size = 50
 chars = ascii_uppercase + digits
 auth_token = ''.join(choice(chars) for _ in range(size))
-with open("auth/token.txt", "w") as f:
+with open(SCRIPT_FILEPATH + "/auth/token.txt", "w") as f:
     f.write(auth_token)
 
 # Add routes

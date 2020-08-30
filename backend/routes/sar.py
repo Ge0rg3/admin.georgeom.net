@@ -14,10 +14,6 @@ sar_module = Blueprint("sar_module", __name__)
 def parse_sar():
     command = ["sadf", "-j"]
     output = sp.check_output(command, stderr=sp.STDOUT).decode()
-    # Temp output
-    with open("/mnt/c/Users/george/Desktop/sarfile.txt", "r") as f:
-        output = f.read()
-    # End of temp output
     logs = unjsonify(output)["sysstat"]["hosts"][0]["statistics"]
     results = []
     for log in logs:
