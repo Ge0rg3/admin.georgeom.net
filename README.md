@@ -38,7 +38,7 @@ server {
 This service needs a bunch of permissions, but we don't want RCE if someone logs in. As such, the following entries have been added to the sudoers file:
 ```
 # nginx service permissions
-george ALL=NOPASSWD: /usr/sbin/service nginx restart, /usr/sbin/service nginx start, /usr/sbin/service nginx stop
+george ALL=NOPASSWD: /usr/sbin/nginx -s reload
 # nginx sites permissions
 george ALL=NOPASSWD: /usr/bin/rm /etc/nginx/sites-enabled/georgeom.net.conf, /usr/bin/ln -s /etc/nginx/sites-available/georgeom.net.conf /etc/nginx/sites-enabled/georgeom.net.conf
 george ALL=NOPASSWD: /usr/bin/rm /etc/nginx/sites-enabled/nextcloud.conf, /usr/bin/ln -s /etc/nginx/sites-available/nextcloud.conf /etc/nginx/sites-enabled/nextcloud.conf

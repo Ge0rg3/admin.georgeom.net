@@ -43,7 +43,7 @@ def check_website(url):
 RM = "/usr/bin/rm"
 LN = "/usr/bin/ln"
 SU = "/usr/bin/su"
-RESTART_NGINX = "sudo /usr/sbin/service nginx restart"
+RESTART_NGINX = "sudo /usr/sbin/nginx -s reload"
 SITES_AVAILABLE = "/etc/nginx/sites-available/"
 SITES_ENABLED = "/etc/nginx/sites-enabled/"
 
