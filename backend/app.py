@@ -1,6 +1,6 @@
 import os
+from binascii import hexlify
 from string import ascii_uppercase, digits
-from random import choice
 from flask import Flask, request, send_from_directory
 from flask_cors import CORS
 
@@ -28,8 +28,7 @@ except FileNotFoundError:
         f.write(password)
 # Generate auth token
 size = 50
-chars = ascii_uppercase + digits
-auth_token = ''.join(choice(chars) for _ in range(size))
+auth_token = hexlify(os.urandom(100)).decode()
 with open(SCRIPT_FILEPATH + "/auth/token.txt", "w") as f:
     f.write(auth_token)
 
