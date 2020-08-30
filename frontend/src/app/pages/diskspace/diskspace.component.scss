@@ -1,0 +1,16 @@
+.fix-chart {
+    margin-left: 5%;
+}
+.bubble {
+    hr {
+        margin-top: 5px;
+        margin-bottom: 20px;
+    }
+}
+.directory {
+    transition: 0.2s;
+    &:hover {
+        color: #2F61A7;
+        cursor: pointer;
+    }
+}

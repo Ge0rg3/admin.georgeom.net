@@ -1,0 +1,114 @@
+#page-holder {
+    margin-left: 17%;
+    margin-right: 1%;
+    padding-top: 1%;
+}
+
+body {
+    background-color: #151A31 !important;
+}
+
+.bubble {
+    color: white;
+    background-color: #222B45;
+    border-radius: 25px;
+    padding: 1%;
+    padding-left: 4%;
+    padding-right: 4%;
+    margin-bottom: 1%;
+    margin-right: 1%;
+    hr {
+        width: 100%;
+        background-color: white;
+    }
+    h2 {
+        margin-top: 2px;
+        margin-bottom: 2px;
+    }
+}
+.standard-bubble-height {
+    height: 45vh;
+    .inner {
+        height: 100%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+}
+.hover-fade {
+    transition: 0.2s;
+    &:hover {
+        color: grey;
+        cursor: pointer;
+    }
+    // Remove all click outlines on item and child items
+    &:focus {
+        outline: none !important;
+    }
+    * {
+        &:focus {
+            outline: none !important;
+        }
+    }
+}
+
+// Fix alignment for icons and stop highlighting
+.material-icons {
+    vertical-align: middle;
+    margin-top: -5px;
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
+}
+
+// Make col items match the largest col heights in the row
+.same-height {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    [class*='col-'] {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+// Center cols in a row
+.center-row-items {
+    justify-content: center !important;
+}
+
+// Overflow words to next line
+.overflow-lines {
+    word-wrap: break-word;
+}
+
+// mb-5 sometimes doesnt work idk
+.bubble .real-mb-5 {
+    margin-bottom: 10px;
+}
+
+// Success and fail font colours
+.success {
+    color: #2f9460;
+}
+
+.fail {
+    color: #bf3232;
+}
+
+// Bold text (from bs4, but we use bs3)
+.font-weight-bold {
+    font-weight: bold;
+}
+
+// Bootstrap d-none is in newer version, so custom one
+.d-none {
+    display: none;
+}
+
+// Allow regular text color in modals
+.modal {
+    color: #334;
+}

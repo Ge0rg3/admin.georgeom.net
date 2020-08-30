@@ -1,0 +1,32 @@
+<div class="container-fluid">
+    <div id="login-box" class="bubble">
+        <div class="row">
+            <h3>Login</h3>
+        </div>
+    </div>
+
+    <div class="bubble">
+        <form>
+            <div class="row">
+                <div class="col-md-12">
+                    <h5>Password:</h5>
+                </div>
+            </div>
+            <div class="row push-down">
+                <div class="col-md-2">
+                    <input [(ngModel)]="passwordInput" [ngModelOptions]="{standalone: true}" type="password" class="form-control" autocomplete>
+                </div>
+            </div>
+            <div *ngIf="invalidPassword" class="row">
+                <div class="col-md-12 text-danger">
+                    <p>Invalid password.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <button class="btn btn-primary" (click)="login()">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

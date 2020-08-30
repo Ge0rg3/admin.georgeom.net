@@ -1,0 +1,134 @@
+<div protected class="container-fluid">
+    
+    <!-- Header -->
+    <div class="row bubble">
+        <div class="col-md-12">
+            <h2>Running Processes</h2>
+        </div>
+    </div>
+    
+    <!-- Half-page bubbles -->
+    <div class="row same-height center-row-items">
+        <!-- CPU Usage graph -->
+        <div class="col-md-11 col-sm-12 col-xs-12 bubble">
+            <div class="row">
+                <div class="col-md-12 real-mb-5">
+                    <h3>CPU Usage History (%)</h3>
+                </div>
+                <hr>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <cpu-usage-chart></cpu-usage-chart>
+                </div>
+            </div>
+        </div>
+
+        <!-- Memory Graph -->
+        <div class="col-md-5 col-sm-12 col-xs-12 bubble standard-bubble-height">
+            <div class="row">
+                <div class="col-md-12 real-mb-5">
+                    <h3>Memory Usage (%)</h3>
+                </div>
+                <hr>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <process-chart [processes]="processes" (processClick)="openProcess($event)"></process-chart>
+                </div>
+            </div>
+        </div>
+
+        <!-- Processes -->
+        <div class="col-md-5 col-sm-12 col-xs-12 bubble standard-bubble-height">
+            <div class="inner">
+                <!-- Header -->
+                <div class="row">
+                    <div class="col-md-12 real-mb-5">
+                        <h3>All Processes</h3>
+                    </div>
+                    <hr>
+                </div>
+                <!-- Processes -->
+                <div class="row text-center real-mb-5 font-weight-bold" style="padding-left: 7%;">
+                    <div class="col-md-1">
+                        Status
+                    </div>
+                    <div class="col-md-1">
+                        PID
+                    </div>
+                    <div class="col-md-3">
+                        Command
+                    </div>
+                    <div class="col-md-2">
+                        CPU %
+                    </div>
+                    <div class="col-md-2">
+                        Mem %
+                    </div>
+                    <div class="col-md-2">
+                        User
+                    </div>
+                </div>
+                <div (click)="openProcess(process)" *ngFor="let process of processes" class="processes row hover-fade text-center real-mb-5" style="padding-left: 7%;">
+                    <div class="col-md-1">
+                        <span class="status-icon" [title]="process.status" [ngSwitch]="process.status">
+                            <i *ngSwitchCase="'Sleeping'" class="material-icons sleeping">nights_stay</i>
+                            <i *ngSwitchCase="'Uninterruptible sleep'" class="material-icons">pause_circle_outline</i>
+                            <i *ngSwitchCase="'Stopped'" class="material-icons">stop</i>
+                            <i *ngSwitchCase="'Stopped by debugger'" class="material-icons">close</i>
+                            <i *ngSwitchCase="'Zombie'" class="material-icons">pending</i>
+                            <i *ngSwitchCase="'Running'" class="material-icons running">play_arrow</i>
+                            <i *ngSwitchCase="'Idle'" class="material-icons">more_horiz</i>
+                        </span>
+                    </div>
+                    <div class="col-md-1">
+                        {{ process.pid }}
+                    </div>
+                    <div class="col-md-3">
+                        {{ process.command }}
+                    </div>
+                    <div class="col-md-2">
+                        {{ process.cpu }}
+                    </div>
+                    <div class="col-md-2">
+                        {{ process.memory }}
+                    </div>
+                    <div class="col-md-2">
+                        {{ process.user }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Process highlight -->
+        <div class="col-md-5 col-sm-12 col-xs-12 bubble">
+            <!-- Starting message -->
+            <div *ngIf="selectedProcess === undefined" class="text-center">
+                <h5 class="text-muted">Click on a process to view all information.</h5>
+            </div>
+            <!-- Details -->
+            <div id="process-details" *ngIf="selectedProcess !== undefined" class="row">
+                <!-- Header -->
+                <div class="col-md-12 real-mb-5">
+                    <h4 class="overflow-lines font-weight-bold">[{{ selectedProcess.pid }}] {{ selectedProcess.command}}</h4>
+                </div>
+                <hr>
+                <!-- Info list -->
+                <div class="col-md-12 overflow-lines">
+                    <p>Command: <code>{{ selectedProcess.command }}</code></p>
+                    <p>PID: {{ selectedProcess.pid }}</p>
+                    <p>CPU Usage: {{ selectedProcess.cpu }}%</p>
+                    <p>Memory Usage: {{ selectedProcess.memory }}%</p>
+                    <p>Status: {{ selectedProcess.status }}</p>
+                    <p>User: <code>{{ selectedProcess.user }}</code></p>
+                    <p>Time: <code>{{ selectedProcess.time }}</code></p>
+                    <p>Priority: {{ selectedProcess.priority }}</p>
+                    <p>Nice Value: {{ selectedProcess.nice_value }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+</div>

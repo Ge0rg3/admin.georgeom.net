@@ -1,0 +1,14 @@
+<div *ngIf="pieChartLabels.length == 0" class="text-center" style="margin-right: 5%; padding-top: 2%;">
+  <h4 class="text-muted">No results.</h4>
+</div>
+<div class="chart" *ngIf="pieChartLabels.length > 0">
+  <canvas baseChart
+    (chartClick)="chartClicked($event)"
+    [data]="pieChartData"
+    [labels]="pieChartLabels"
+    [chartType]="pieChartType"
+    [options]="pieChartOptions"
+    [colors]="pieChartColors"
+    [legend]="pieChartLegend">
+  </canvas>
+</div>

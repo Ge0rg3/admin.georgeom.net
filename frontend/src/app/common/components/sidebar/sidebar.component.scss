@@ -1,0 +1,29 @@
+.sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    display: block;
+    overflow-y: auto;
+    background-color: #222B45;
+    border-radius: 25px;
+    margin: 1%;
+    padding-left: 1%;
+    padding-right: 1%;
+    width: 15%;
+    color: white;
+    text-align: center;
+    .row {
+        margin-left: -25px;
+    }
+    hr {
+        margin-top: 5px;
+        margin-bottom: 7px;
+    }
+    img {
+        margin-top: 2%;
+        margin-bottom: 2.5%;
+        width: 100%;
+    }
+}

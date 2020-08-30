@@ -1,0 +1,30 @@
+hr {
+    width: 90%;
+}
+h3 {
+    padding-left: 3%;
+}
+.sleeping {
+    color: #c47649;
+}
+.running {
+    color: #52b377;
+}
+.processes {
+    .status-icon {
+        i {
+            transition: 0.2s;
+        }
+    }
+    &:hover {
+        .sleeping {
+            color: #9c4c1e;
+        }
+        .running {
+            color: #32704a;
+        }
+    }
+}
+#process-details {
+    padding-left: 3%;
+}

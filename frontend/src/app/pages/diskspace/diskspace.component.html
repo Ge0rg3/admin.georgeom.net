@@ -1,0 +1,122 @@
+<div protected class="container-fluid">
+    <!-- Row 1 -->
+    <div class="row bubble">
+        <!-- Header -->
+        <div class="col-md-12">
+            <h2>Diskspace</h2>
+        </div>
+    </div>
+
+    <!-- Row 2 -->
+    <div class="row justify-content-center">
+        <!-- File list -->
+        <div class="bubble standard-bubble-height col-md-5 col-sm-12 col-xs-12">
+            <div class="inner">
+                <!-- Current dir -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4 class="overflow-lines">
+                            Path:
+                            <!-- Show path and allow user to click on chunks to view them separately -->
+                            <ng-container *ngFor="let chunk of getPathChunks(); let i = index"><!--
+                                --><span (click)="updatePathByIndex(i)" class="hover-fade">{{ chunk }}</span><!--
+                            --></ng-container>
+                        </h4>
+                    </div>
+                </div>
+                <hr>
+                <!-- Folders -->
+                <div class="row text-center directory" (click)="traverseDirectory()">
+                    <div class="col-md-1 col-sm-1 col-xs-2">
+                        <i class="material-icons">backspace</i>
+                    </div>
+                    <div class="col-md-3 col-sm-4 col-xs-5">
+                        ..
+                    </div>
+                </div>
+                <div class="row text-center"
+                    [class.directory]="file.entry_type == 'directory' || file.entry_type == 'link'"
+                    *ngFor="let file of files"
+                    (click)="openDirectory(file)"
+                    (mouseover)="viewFile(file)">
+                    <div class="col-md-1 col-sm-1 col-xs-2">
+                        <ng-container [ngSwitch]="file.entry_type">
+                            <i *ngSwitchCase="'directory'" class="material-icons">folder</i>
+                            <i *ngSwitchCase="'file'" class="material-icons">insert_drive_file</i>
+                            <i *ngSwitchCase="'link'" class="material-icons">link</i>
+                            <i *ngSwitchCase="'socket'" class="material-icons">device_hub</i>
+                            <i *ngSwitchCase="'unknown'" class="material-icons">help_outline</i>
+                        </ng-container>
+                    </div>
+                    <div class="col-md-3 col-sm-4 col-xs-5 overflow-lines">
+                        {{ file.entry }}
+                    </div>
+                    <div class="col-md-2 col-sm-3 hidden-xs overflow-lines">
+                        {{ file.link }}
+                    </div>
+                    <div class="col-md-3 col-sm-4 col-xs-5">
+                        <ng-container *ngIf="file.filesize == -1">
+                            <i class="material-icons">block</i>
+                        </ng-container>
+                        <ng-container *ngIf="file.filesize != -1">
+                            {{ utils.formatBytes(file.filesize) }}
+                        </ng-container>
+                    </div>
+                    <div class="col-md-3 hidden-sm hidden-xs">
+                        {{ file.owner }}:{{ file.group }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Pie Chart -->
+        <div class="bubble standard-bubble-height col-md-6 col-sm-12 col-xs-12">
+            <div class="fix-chart">
+                <diskspace-chart [path]="currentPath" (path_update)="updatePath($event)" (files)="setFiles($event)" (file_update)="updateFileView($event)"></diskspace-chart>
+            </div>
+        </div>
+    </div>
+
+    <!-- Row 2-->
+    <div class="row same-height center-row-items">
+        <!-- View file box -->
+        <div class="bubble col-md-4 col-sm-12 col-xs-12">
+            <!-- Starting message -->
+            <div class="text-center" *ngIf="currentHover === undefined">
+                <h5 class="text-muted">Hover over an item to view its details.</h5>
+            </div>
+            <!-- File details -->
+            <div class="row" *ngIf="currentHover !== undefined">
+                <div class="col-md-12">
+                    <h4 class="overflow-lines">
+                        <span [ngSwitch]="currentHover.entry_type">
+                            <i *ngSwitchCase="'directory'" class="material-icons">folder</i>
+                            <i *ngSwitchCase="'file'" class="material-icons">insert_drive_file</i>
+                            <i *ngSwitchCase="'link'" class="material-icons">link</i>
+                            <i *ngSwitchCase="'socket'" class="material-icons">device_hub</i>
+                            <i *ngSwitchCase="'unknown'" class="material-icons">help_outline</i>
+                        </span>
+                        Item: <strong>{{ currentHover.entry }}</strong>
+                    </h4>
+                </div>
+                <div class="col-md-12 overflow-lines">
+                    <p>Item type: {{ currentHover.entry_type }}</p>
+                    <p>Path: <code>{{ currentPath }}{{ currentHover.entry }}</code></p>
+                    <ng-container *ngIf="currentHover.entry_type == 'link'">
+                        <p>Symlink: <code>{{ currentHover.link }}</code></p>
+                    </ng-container>
+                    <p>Permissions: <code>{{ currentHover.permissions }}</code></p>
+                    <p>Owner/Group: <code>{{ currentHover.owner }}:{{ currentHover.group }}</code></p>
+                    <ng-container *ngIf="currentHover.filesize != -1">
+                        <p>Size: {{ utils.formatBytes(currentHover.filesize) }} <ng-container *ngIf="currentHover.filesize > 1024">({{ currentHover.filesize }} bytes)</ng-container></p>
+                    </ng-container>
+                    <ng-container *ngIf="currentHover.filesize == -1">
+                        <p>Size: Could not retrieve from <code>du</code>.</p>
+                    </ng-container>
+                    <p>Modification Timestamp: {{ currentHover.date }} {{ currentHover.time }}</p>
+                    <p>Item links: {{ currentHover.links }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

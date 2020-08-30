@@ -1,0 +1,82 @@
+from string import ascii_uppercase, digits
+from random import choice
+from flask import Flask, request
+from flask_cors import CORS
+
+# Route imports
+from routes.ls import ls_module
+from routes.status import status_module
+from routes.login import login_module
+from routes.top import top_module
+from routes.sar import sar_module
+
+# Setup flask app
+APP_ROOT = "/api"
+app = Flask(__name__, template_folder="views", static_folder="views/static")
+app.config["APPLICATION_ROOT"] = APP_ROOT
+CORS(app)
+
+# Check password exists, and create if not
+try:
+    f = open("auth/password.txt", "r")
+    f.close()
+except FileNotFoundError:
+    password = input("Enter password: ")
+    with open("auth/password.txt", "w") as f:
+        f.write(password)
+# Generate auth token
+size = 50
+chars = ascii_uppercase + digits
+auth_token = ''.join(choice(chars) for _ in range(size))
+with open("auth/token.txt", "w") as f:
+    f.write(auth_token)
+
+# Add routes
+app.register_blueprint(ls_module, url_prefix=APP_ROOT)
+app.register_blueprint(status_module, url_prefix=APP_ROOT)
+app.register_blueprint(login_module, url_prefix=APP_ROOT)
+app.register_blueprint(top_module, url_prefix=APP_ROOT)
+app.register_blueprint(sar_module, url_prefix=APP_ROOT)
+
+
+# Check auth
+@app.before_request
+def before_request():
+    # If attempting to login, continue
+    if request.path == "/api/login" or request.method == "OPTIONS":
+        return
+    # Otherwise, auth token required
+    token_header = request.headers.get("Token") or ""
+    if token_header != auth_token:
+        return {
+            "status": 401,
+            "error": "Invalid auth token"
+        }, 401
+
+
+# Catch errors
+@app.errorhandler(400)
+def invalid_request(e):
+    return {
+        "status": 400,
+        "error": "Invalid request."
+    }, 400
+
+
+@app.errorhandler(404)
+def route_not_found(e):
+    return {
+        "status": 404,
+        "error": "Route not found."
+    }, 404
+
+
+# Endpoint to check if API running
+@app.route('/api')
+def api():
+    return {"status": 200}, 200
+
+
+# Run app
+if __name__ == "__main__":
+    app.run()
