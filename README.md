@@ -33,3 +33,22 @@ server {
         }
 }
 ```
+
+## Permissions
+This service needs a bunch of permissions, but we don't want RCE if someone logs in. As such, the following entries have been added to the sudoers file:
+```
+# nginx service permissions
+george ALL=NOPASSWD: /usr/sbin/service nginx restart, /usr/sbin/service nginx start, /usr/sbin/service nginx stop
+# nginx sites permissions
+george ALL=NOPASSWD: /usr/bin/rm /etc/nginx/sites-enabled/georgeom.net.conf, /usr/bin/ln -s /etc/nginx/sites-available/georgeom.net.conf /etc/nginx/sites-enabled/georgeom.net.conf
+george ALL=NOPASSWD: /usr/bin/rm /etc/nginx/sites-enabled/nextcloud.conf, /usr/bin/ln -s /etc/nginx/sites-available/nextcloud.conf /etc/nginx/sites-enabled/nextcloud.conf
+george ALL=NOPASSWD: /usr/bin/rm /etc/nginx/sites-enabled/stegonline.conf, /usr/bin/ln -s /etc/nginx/sites-available/stegonline.conf /etc/nginx/sites-enabled/stegonline.conf
+george ALL=NOPASSWD: /usr/bin/rm /etc/nginx/sites-enabled/kf2.conf, /usr/bin/ln -s /etc/nginx/sites-available/kf2.conf /etc/nginx/sites-enabled/kf2.conf
+# linuxgsm permissions
+george ALL=NOPASSWD: /usr/bin/su - kf2server - /home/kf2server/kf2server stop
+george ALL=NOPASSWD: /usr/bin/su - kf2server - /home/kf2server/kf2server start
+george ALL=NOPASSWD: /usr/bin/su - kf2server - /home/kf2server/kf2server restart
+george ALL=NOPASSWD: /usr/bin/su - mcserver - /home/mcserver/mcserver stop
+george ALL=NOPASSWD: /usr/bin/su - mcserver - /home/mcserver/mcserver start
+george ALL=NOPASSWD: /usr/bin/su - mcserver - /home/mcserver/mcserver restart
+```
