@@ -1,3 +1,5 @@
+# Custom PATH so that we can run this with cron
+PATH="/usr/local/bin:/usr/bin:/bin"
 # Get path of start.sh script
 SCRIPTPATH="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 # Start uwsgi server
