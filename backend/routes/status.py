@@ -40,6 +40,13 @@ def check_website(url):
     return response.status_code == 200
 
 
+RM = "/usr/bin/rm"
+LN = "/usr/bin/ln"
+SU = "/usr/bin/su"
+RESTART_NGINX = "sudo /usr/sbin/service nginx restart"
+SITES_AVAILABLE = "/etc/nginx/sites-available/"
+SITES_ENABLED = "/etc/nginx/sites-enabled/"
+
 SERVICES = [
     {
         "id": "website",
@@ -47,11 +54,11 @@ SERVICES = [
         "description": "The https://georgeom.net homepage.",
         "status_mapping": [check_website, "https://georgeom.net"],
         "commands": {
-            "stop": "sudo /usr/bin/rm /etc/nginx/sites-enabled/nextcloud.conf",
-            "start": "sudo /usr/bin/ln -s /etc/nginx/sites-available/" +
-                "nextcloud.conf /etc/nginx/sites-enabled/nextcloud.conf && " +
-                "sudo /usr/sbin/service nginx restart",
-            "restart": ""
+            "stop": [f"sudo {RM} {SITES_ENABLED}nextcloud.conf"],
+            "start": [f"sudo {LN} -s {SITES_AVAILABLE}" +
+                      f"nextcloud.conf {SITES_ENABLED}nextcloud.conf",
+                      RESTART_NGINX],
+            "restart": []
         }
     },
     {
@@ -60,11 +67,11 @@ SERVICES = [
         "description": "The https://kf2.georgeom.net admin portal.",
         "status_mapping": [check_website, "https://kf2.georgeom.net"],
         "commands": {
-            "stop": "sudo /usr/bin/rm /etc/nginx/sites-enabled/kf2.conf",
-            "start": "sudo /usr/bin/ln -s /etc/nginx/sites-available/" +
-                "kf2.conf /etc/nginx/sites-enabled/kf2.conf && " +
-                "sudo /usr/sbin/service nginx restart",
-            "restart": ""
+            "stop": [f"sudo {RM} {SITES_ENABLED}kf2.conf"],
+            "start": [f"sudo {LN} -s {SITES_AVAILABLE}" +
+                      f"kf2.conf {SITES_ENABLED}kf2.conf",
+                      RESTART_NGINX],
+            "restart": []
         }
     },
     {
@@ -73,12 +80,12 @@ SERVICES = [
         "description": "KF2 gameserver at port 7777.",
         "status_mapping": [check_local_port, 7777],
         "commands": {
-            "stop": "sudo /usr/bin/su - kf2server - " +
-                "/home/kf2server/kf2server stop",
-            "start": "sudo /usr/bin/su - kf2server - " +
-                "/home/kf2server/kf2server start",
-            "restart": "sudo /usr/bin/su - kf2server - " +
-                "/home/kf2server/kf2server restart",
+            "stop": [f"sudo {SU} - kf2server - " +
+                     "/home/kf2server/kf2server stop"],
+            "start": [f"sudo {SU} - kf2server - " +
+                      "/home/kf2server/kf2server start"],
+            "restart": [f"sudo {SU} - kf2server - " +
+                        "/home/kf2server/kf2server restart"],
         }
     },
     {
@@ -87,12 +94,12 @@ SERVICES = [
         "description": "Minecraft server at port 25565.",
         "status_mapping": [check_local_port, 25565],
         "commands": {
-            "stop": "sudo /usr/bin/su - mcserver - " +
-                "/home/mcserver/mcserver stop",
-            "start": "sudo /usr/bin/su - mcserver - " +
-                "/home/mcserver/mcserver start",
-            "restart": "sudo /usr/bin/su - mcserver - " +
-                "/home/mcserver/mcserver restart",
+            "stop": [f"sudo {SU} - mcserver - " +
+                     "/home/mcserver/mcserver stop"],
+            "start": [f"sudo {SU} - mcserver - " +
+                      "/home/mcserver/mcserver start"],
+            "restart": [f"sudo {SU} - mcserver - " +
+                        "/home/mcserver/mcserver restart"],
         }
     },
     {
@@ -102,11 +109,11 @@ SERVICES = [
                 "https://cloud.georgeom.net.",
         "status_mapping": [check_website, "https://cloud.georgeom.net"],
         "commands": {
-            "stop": "sudo /usr/bin/rm /etc/nginx/sites-enabled/nextcloud.conf",
-            "start": "sudo /usr/bin/ln -s /etc/nginx/sites-available/" +
-                "nextcloud.conf /etc/nginx/sites-enabled/nextcloud.conf && " +
-                "sudo /usr/sbin/service nginx restart",
-            "restart": ""
+            "stop": [f"sudo {RM} {SITES_ENABLED}nextcloud.conf"],
+            "start": [f"sudo {LN} -s {SITES_AVAILABLE}" +
+                      f"nextcloud.conf {SITES_ENABLED}nextcloud.conf",
+                      RESTART_NGINX],
+            "restart": []
         }
     },
     {
@@ -117,12 +124,12 @@ SERVICES = [
                 "Restart triggers nginx service restart.",
         "status_mapping": [check_website, "https://stegonline.georgeom.net"],
         "commands": {
-            "stop": "sudo /usr/bin/rm " +
-                "/etc/nginx/sites-enabled/stegonline.conf",
-            "start": "sudo /usr/bin/ln -s /etc/nginx/sites-available/" +
-                "stegonline.conf /etc/nginx/sites-enabled/stegonline.conf" +
-                " && sudo /usr/sbin/service nginx restart",
-            "restart": ""
+            "stop": [f"sudo {RM} " +
+                     f"{SITES_ENABLED}stegonline.conf"],
+            "start": [f"sudo /usr/bin/ln -s {SITES_AVAILABLE}" +
+                      f"stegonline.conf {SITES_ENABLED}stegonline.conf",
+                      RESTART_NGINX],
+            "restart": []
         }
     }
 ]
@@ -139,7 +146,7 @@ def checkStatus():
             "name": service["name"],
             "description": service["description"],
             "status": status_map[0](status_map[1]),
-            "can_restart": service["commands"]["restart"] != ""
+            "can_restart": service["commands"]["restart"] != []
         })
     return {
         "status": 200,
@@ -155,26 +162,28 @@ def stopService(action, service_id):
             "status": 400,
             "error": "Action must be start/stop/restart."
         }, 400
-    # Get service command
+    # Get service commands
     for service in SERVICES:
         if service["id"] == service_id:
-            command = service["commands"][action].split(" ")
+            commands = []
+            for command in service["commands"][action]:
+                commands.append(command.split(" "))
             break
     else:
         return {
             "status": 400,
             "error": "Unknown service id."
         }, 400
-    # Run command (if not empty)
-    if not (len(command) == 0 and command[0] == ""):
-        try:
-            sp.check_output(command, stderr=sp.STDOUT)
-        except sp.CalledProcessError as e:
-            return {
-                "status": 500,
-                "error": f"Error when {action}ing service.",
-                "debug": e.decode()
-            }, 500
+    # Run command (if exists)
+    if len(commands) > 0:
+        for command in commands:
+            try:
+                sp.check_output(command, stderr=sp.STDOUT)
+            except sp.CalledProcessError:
+                return {
+                    "status": 500,
+                    "error": f"Error when {action}ing service."
+                }, 500
     return {
         "status": 200
     }, 200
