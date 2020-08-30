@@ -169,10 +169,11 @@ def stopService(action, service_id):
     if not (len(command) == 0 and command[0] == ""):
         try:
             sp.check_output(command, stderr=sp.STDOUT)
-        except sp.CalledProcessError:
+        except sp.CalledProcessError as e:
             return {
                 "status": 500,
-                "error": f"Error when {action}ing service."
+                "error": f"Error when {action}ing service.",
+                "debug": e.decode()
             }, 500
     return {
         "status": 200
