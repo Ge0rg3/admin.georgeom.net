@@ -1,7 +1,8 @@
 from string import ascii_uppercase, digits
 from random import choice
-from flask import Flask, request
+from flask import Flask, request, send_from_directory
 from flask_cors import CORS
+from os import listdir
 
 # Route imports
 from routes.ls import ls_module
@@ -39,9 +40,23 @@ app.register_blueprint(top_module, url_prefix=APP_ROOT)
 app.register_blueprint(sar_module, url_prefix=APP_ROOT)
 
 
-# Check auth
+# Serve frontend & check auth on backend
 @app.before_request
 def before_request():
+    print(request.path)
+    """
+    Serve frontend
+    """
+    if not request.path.startswith("/api"):
+        # If in assets folder, return ilfe
+        if request.path.startswith("/assets/"):
+            return send_from_directory("./views/assets", request.path[8:])
+        # Otherwise, let angular handle routing
+        else:
+            return send_from_directory("./views/", "index.html")
+    """
+    Authenticate API requests
+    """
     # If attempting to login, continue
     if request.path == "/api/login" or request.method == "OPTIONS":
         return
