@@ -9,3 +9,27 @@ git wasn't used during the bulk development of the project, this is just for cha
 3) Run setup.sh script with sudo/as root
 4) Run deploy.sh script to compile angular
 5) Run start.sh script to start the uwsgi server
+
+## Restart on system boot
+Add the following to user crontab
+```
+@reboot bash /var/www/admin/start.sh
+```
+
+## Serving on nginx
+Create the following nginx config
+```
+server {
+        listen 80;
+
+	# If cloudflare enforcer exists, uncheck below
+        # include /etc/nginx/cloudflare-allow.conf;
+        # deny all;
+
+	# Replace site.com with domain
+        server_name site.com;
+        location / {
+                proxy_pass http://127.0.0.1:1337/;
+        }
+}
+```
