@@ -49,7 +49,8 @@ SERVICES = [
         "commands": {
             "stop": "sudo /usr/bin/rm /etc/nginx/sites-enabled/nextcloud.conf",
             "start": "sudo /usr/bin/ln -s /etc/nginx/sites-available/" +
-                "nextcloud.conf /etc/nginx/sites-enabled/nextcloud.conf",
+                "nextcloud.conf /etc/nginx/sites-enabled/nextcloud.conf && " +
+                "sudo service nginx restart",
             "restart": ""
         }
     },
@@ -61,7 +62,8 @@ SERVICES = [
         "commands": {
             "stop": "sudo /usr/bin/rm /etc/nginx/sites-enabled/kf2.conf",
             "start": "sudo /usr/bin/ln -s /etc/nginx/sites-available/" +
-                "kf2.conf /etc/nginx/sites-enabled/kf2.conf",
+                "kf2.conf /etc/nginx/sites-enabled/kf2.conf && " +
+                "sudo service nginx restart",
             "restart": ""
         }
     },
@@ -102,7 +104,8 @@ SERVICES = [
         "commands": {
             "stop": "sudo /usr/bin/rm /etc/nginx/sites-enabled/nextcloud.conf",
             "start": "sudo /usr/bin/ln -s /etc/nginx/sites-available/" +
-                "nextcloud.conf /etc/nginx/sites-enabled/nextcloud.conf",
+                "nextcloud.conf /etc/nginx/sites-enabled/nextcloud.conf && " +
+                "sudo service nginx restart",
             "restart": ""
         }
     },
@@ -117,7 +120,8 @@ SERVICES = [
             "stop": "sudo /usr/bin/rm " +
                 "/etc/nginx/sites-enabled/stegonline.conf",
             "start": "sudo /usr/bin/ln -s /etc/nginx/sites-available/" +
-                "stegonline.conf /etc/nginx/sites-enabled/stegonline.conf",
+                "stegonline.conf /etc/nginx/sites-enabled/stegonline.conf" +
+                " && sudo service nginx restart",
             "restart": ""
         }
     }
