@@ -52,3 +52,11 @@ george ALL=NOPASSWD: /usr/bin/su - mcserver - /home/mcserver/mcserver stop
 george ALL=NOPASSWD: /usr/bin/su - mcserver - /home/mcserver/mcserver start
 george ALL=NOPASSWD: /usr/bin/su - mcserver - /home/mcserver/mcserver restart
 ```
+
+## Usage
+#### Diskspace
+![Diskspace](/frontend/src/assets/diskspace.png "Diskspace")
+#### Processes
+![Processes](/frontend/src/assets/processes.png "Processes")
+#### Statuses
+![Statuses](/frontend/src/assets/status.png "Statuses")
