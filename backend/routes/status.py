@@ -54,7 +54,8 @@ SERVICES = [
         "description": "The https://georgeom.net homepage.",
         "status_mapping": [check_website, "https://georgeom.net"],
         "commands": {
-            "stop": [f"sudo {RM} {SITES_ENABLED}nextcloud.conf"],
+            "stop": [f"sudo {RM} {SITES_ENABLED}nextcloud.conf",
+                     RESTART_NGINX],
             "start": [f"sudo {LN} -s {SITES_AVAILABLE}" +
                       f"nextcloud.conf {SITES_ENABLED}nextcloud.conf",
                       RESTART_NGINX],
@@ -67,7 +68,7 @@ SERVICES = [
         "description": "The https://kf2.georgeom.net admin portal.",
         "status_mapping": [check_website, "https://kf2.georgeom.net"],
         "commands": {
-            "stop": [f"sudo {RM} {SITES_ENABLED}kf2.conf"],
+            "stop": [f"sudo {RM} {SITES_ENABLED}kf2.conf", RESTART_NGINX],
             "start": [f"sudo {LN} -s {SITES_AVAILABLE}" +
                       f"kf2.conf {SITES_ENABLED}kf2.conf",
                       RESTART_NGINX],
@@ -109,7 +110,8 @@ SERVICES = [
                 "https://cloud.georgeom.net.",
         "status_mapping": [check_website, "https://cloud.georgeom.net"],
         "commands": {
-            "stop": [f"sudo {RM} {SITES_ENABLED}nextcloud.conf"],
+            "stop": [f"sudo {RM} {SITES_ENABLED}nextcloud.conf",
+                     RESTART_NGINX],
             "start": [f"sudo {LN} -s {SITES_AVAILABLE}" +
                       f"nextcloud.conf {SITES_ENABLED}nextcloud.conf",
                       RESTART_NGINX],
@@ -125,7 +127,7 @@ SERVICES = [
         "status_mapping": [check_website, "https://stegonline.georgeom.net"],
         "commands": {
             "stop": [f"sudo {RM} " +
-                     f"{SITES_ENABLED}stegonline.conf"],
+                     f"{SITES_ENABLED}stegonline.conf", RESTART_NGINX],
             "start": [f"sudo /usr/bin/ln -s {SITES_AVAILABLE}" +
                       f"stegonline.conf {SITES_ENABLED}stegonline.conf",
                       RESTART_NGINX],
