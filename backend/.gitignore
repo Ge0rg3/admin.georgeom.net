@@ -1,3 +1,4 @@
 auth/*
 views/*
+__pycache__/
 *.pyc
