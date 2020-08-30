@@ -2,7 +2,7 @@
 rm -r backend/views/*
 # Build angular
 pushd frontend
-ng build --output-path=../backend/views --deploy-url /assets/
+ng build --prod --output-path=../backend/views --deploy-url /assets/
 popd
 # Move angular files to static assets folder
 pushd backend
