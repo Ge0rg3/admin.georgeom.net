@@ -1,17 +1,27 @@
 .sidebar {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 1000;
-    display: block;
+    // 767.98px is all values below bootstrap md
+    @media (max-width: 767.98px) {
+        overflow-x: hidden;
+        .sidebar-image {
+            display: none;
+        }
+    }
+    // 768px is bootstrap's md min width
+    @media (min-width: 768px) {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1000;
+        display: block;
+        width: 15%;
+     }
     overflow-y: auto;
     background-color: #222B45;
     border-radius: 25px;
     margin: 1%;
     padding-left: 1%;
     padding-right: 1%;
-    width: 15%;
     color: white;
     text-align: center;
     .row {

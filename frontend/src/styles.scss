@@ -1,5 +1,12 @@
 #page-holder {
-    margin-left: 17%;
+    // 767.98px is all values below bootstrap md
+    @media (max-width: 767.98px) {
+        margin-left: 1%;
+    }
+    // 768px is bootstrap's md min width
+    @media (min-width: 768px) {
+        margin-left: 17%;
+    }
     margin-right: 1%;
     padding-top: 1%;
 }
