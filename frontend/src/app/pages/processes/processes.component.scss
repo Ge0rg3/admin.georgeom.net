@@ -1,15 +1,20 @@
+$max-xs: 767.98px;
+
+// Simple page tidying
 hr {
     width: 90%;
 }
 h3 {
     padding-left: 3%;
 }
+// Sleep/run colours
 .sleeping {
     color: #c47649;
 }
 .running {
     color: #52b377;
 }
+// Nice hover effect on processes
 .processes {
     .status-icon {
         i {
@@ -24,7 +29,24 @@ h3 {
             color: #32704a;
         }
     }
+    @media (max-width: $max-xs) {
+        margin-bottom: 2%;
+        hr {
+            margin-top: 5% !important;
+            padding-left: 0%;
+            width: 50%;
+        }
+    }
 }
+
+// Pad process details box
 #process-details {
     padding-left: 3%;
+}
+
+// Mobile-friendly process list
+#process-headers {
+    @media (max-width: $max-xs) {
+        display: none;
+    }
 }

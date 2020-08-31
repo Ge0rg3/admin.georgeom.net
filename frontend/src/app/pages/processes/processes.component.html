@@ -50,28 +50,28 @@
                     <hr>
                 </div>
                 <!-- Processes -->
-                <div class="row text-center real-mb-5 font-weight-bold" style="padding-left: 7%;">
-                    <div class="col-md-1">
+                <div id="process-headers" class="row text-center real-mb-5 font-weight-bold" style="padding-left: 7%;">
+                    <div class="col-lg-1 col-md-1 col-sm-1">
                         Status
                     </div>
-                    <div class="col-md-1">
+                    <div class="col-lg-1 col-md-1 col-sm-1">
                         PID
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-lg-3 col-md-3 col-sm-3">
                         Command
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-lg-2 col-md-2 col-sm-2">
                         CPU %
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-lg-2 col-md-2 col-sm-2">
                         Mem %
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-lg-2 col-md-2 col-sm-2">
                         User
                     </div>
                 </div>
-                <div (click)="openProcess(process)" *ngFor="let process of processes" class="processes row hover-fade text-center real-mb-5" style="padding-left: 7%;">
-                    <div class="col-md-1">
+                <div (click)="openProcess(process)" *ngFor="let process of processes; let i = index" class="processes row hover-fade text-center real-mb-5" style="padding-left: 7%;">
+                    <div class="non-xs-only col-lg-1 col-md-1 col-sm-1">
                         <span class="status-icon" [title]="process.status" [ngSwitch]="process.status">
                             <i *ngSwitchCase="'Sleeping'" class="material-icons sleeping">nights_stay</i>
                             <i *ngSwitchCase="'Uninterruptible sleep'" class="material-icons">pause_circle_outline</i>
@@ -82,21 +82,29 @@
                             <i *ngSwitchCase="'Idle'" class="material-icons">more_horiz</i>
                         </span>
                     </div>
-                    <div class="col-md-1">
-                        {{ process.pid }}
+                    <div class="xs-only col-xs-12">
+                        <p><span class="font-weight-bold">Status:</span> {{ process.status }}</p>
                     </div>
-                    <div class="col-md-3">
-                        {{ process.command }}
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                        <p><span class="xs-only font-weight-bold">PID:</span> {{ process.pid }}</p>
                     </div>
-                    <div class="col-md-2">
-                        {{ process.cpu }}
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <p><span class="xs-only font-weight-bold">Command: </span>{{ process.command }}</p>
                     </div>
-                    <div class="col-md-2">
-                        {{ process.memory }}
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                        <p><span class="xs-only font-weight-bold">CPU: </span>{{ process.cpu }}</p>
                     </div>
-                    <div class="col-md-2">
-                        {{ process.user }}
+                    <div class="col-md-2 col-md-2 col-sm-2 col-xs-12">
+                        <p><span class="xs-only font-weight-bold">Memory: </span>{{ process.memory }}</p>
                     </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                        <p><span class="xs-only font-weight-bold">User: </span>{{ process.user }}</p>
+                    </div>
+                    <!-- xs padding -->
+                    <ng-container *ngIf="i != processes.length - 1">
+                        <div class="xs-only col-xs-12" style="height: 1vh"></div>
+                        <hr class="xs-only">
+                    </ng-container>
                 </div>
             </div>
         </div>

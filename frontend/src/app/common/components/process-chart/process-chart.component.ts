@@ -56,8 +56,10 @@ export class ProcessChartComponent {
   }
 
   public chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
-    let columnIndex: number = active[0]["_index"];
-    this.processClick.emit(this.filteredProcesses[columnIndex]);
+    if (active[0]) {
+      let columnIndex: number = active[0]["_index"];
+      this.processClick.emit(this.filteredProcesses[columnIndex]);
+    }
   }
 
 }

@@ -1,11 +1,12 @@
+$max-sm: 767.98px;
+$max-md: 991.98px;
+
 .status-row {
     margin-bottom: 2vh;
-    @media (max-width: 991.98px) {
-        // 991.98px is all values below bootstrap lg
+    @media (max-width: $max-md) {
         margin-bottom: 5vh;
     }
-    @media (max-width: 767.98px) {
-        // 767.98px is the max md size
+    @media (max-width: $max-sm) {
         button {
             margin-bottom: 10px;
         }
