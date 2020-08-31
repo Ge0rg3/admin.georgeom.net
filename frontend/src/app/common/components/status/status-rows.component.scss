@@ -1,0 +1,13 @@
+.status-row {
+    margin-bottom: 2vh;
+    @media (max-width: 991.98px) {
+        // 991.98px is all values below bootstrap lg
+        margin-bottom: 5vh;
+    }
+    @media (max-width: 767.98px) {
+        // 767.98px is the max md size
+        button {
+            margin-bottom: 10px;
+        }
+    }
+}
