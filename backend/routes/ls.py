@@ -83,7 +83,7 @@ def parse_ls(foldername):
             "links": result[1],
             "owner": result[2],
             "group": result[3],
-            "filesize": du_results.get(result[7], -1),
+            "filesize": du_results.get(result[7], 0),
             "date": result[5],
             "time": result[6],
             "entry": result[7],

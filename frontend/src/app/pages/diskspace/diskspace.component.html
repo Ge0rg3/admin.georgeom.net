@@ -55,7 +55,7 @@
                         {{ file.link }}
                     </div>
                     <div class="col-md-3 col-sm-4 col-xs-5">
-                        <ng-container *ngIf="file.filesize == -1">
+                        <ng-container *ngIf="!canRead(file)">
                             <i class="material-icons">block</i>
                         </ng-container>
                         <ng-container *ngIf="file.filesize != -1">
@@ -69,7 +69,7 @@
             </div>
         </div>
         <!-- Pie Chart -->
-        <div class="bubble standard-bubble-height col-md-6 col-sm-12 col-xs-12">
+        <div class="test bubble col-md-6 col-sm-12 col-xs-12">
             <div class="fix-chart">
                 <diskspace-chart [path]="currentPath" (path_update)="updatePath($event)" (files)="setFiles($event)" (file_update)="updateFileView($event)"></diskspace-chart>
             </div>

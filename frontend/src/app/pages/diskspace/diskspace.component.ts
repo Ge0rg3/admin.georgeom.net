@@ -77,4 +77,9 @@ export class DiskspaceComponent implements OnInit {
     this.viewFile(fileobj);
   }
 
+  // Check if we are allowed to open the directory
+  public canRead(file: any): boolean {
+    return (!(file.owner == "root" && file.group == "root" && file.permissions.endsWith("------")))
+  }
+
 }

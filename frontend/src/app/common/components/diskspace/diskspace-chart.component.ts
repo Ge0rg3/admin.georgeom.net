@@ -9,8 +9,7 @@ import { LsService } from '../../services/ls.service';
 @Component({
   selector: 'diskspace-chart',
   templateUrl: 'diskspace-chart.component.html',
-  styles: [
-  ]
+  styleUrls: ['diskspace-chart.component.scss']
 })
 export class DiskspaceChartComponent implements OnInit {
   @Input() path: string = "/";
@@ -82,8 +81,8 @@ export class DiskspaceChartComponent implements OnInit {
           colors.push(this.utils.randomRgb(result.entry));
         }
         this.pieChartColors = [{backgroundColor: colors}]
-        if (labels.length > 50) {
-          // Don't show labels if there are too many
+        if (labels.length > 25 || window.innerWidth < 576) {
+          // Don't show labels if there are too many, or if on mobile
           this.pieChartLegend = false;
         }
         else {
