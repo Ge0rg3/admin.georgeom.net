@@ -4,8 +4,7 @@ import { StatusService } from '../../services/status.service';
 @Component({
   selector: 'status-rows',
   templateUrl: 'status-rows.component.html',
-  styles: [
-  ]
+  styleUrls: ['status-rows.component.scss']
 })
 export class StatusRows implements OnInit {
   @Input() minimal: boolean = true;

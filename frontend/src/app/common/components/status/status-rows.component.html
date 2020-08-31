@@ -1,23 +1,30 @@
-<div *ngFor="let result of statuses" class="row same-height center-row-items real-mb-5">
-    <div class="col-md-1">
+<!-- Rows -->
+<div *ngFor="let result of statuses" class="status-row row same-height center-row-items">
+    <div class="col-md-1 col-sm-12 col-xs-12 text-center">
         <h5>
             <i *ngIf="result.status" class="material-icons success">thumb_up</i>
             <i *ngIf="!result.status" class="material-icons fail">thumb_down</i>
         </h5>
     </div>
-    <div [class.col-md-2]="!minimal" [class.col-md-5]="minimal" class="text-center">
+    <div [ngClass]="{
+        'col-sm-12': !minimal,
+        'col-xs-12': !minimal,
+        'col-md-2': !minimal,
+        'col-md-5': minimal,
+        'text-center': true
+    }">
         <h5>{{ result.name }}</h5>
     </div>
-    <div *ngIf="!minimal" class="col-md-4 text-center">
+    <div *ngIf="!minimal" class="col-md-4 col-sm-12 col-xs-12 text-center">
         <h5>{{ result.description }}</h5>
     </div>
-    <div *ngIf="!minimal" class="col-md-2 text-center overflow-lines">
+    <div *ngIf="!minimal" class="col-md-2 col-sm-4 col-xs-12 text-center overflow-lines">
         <button (click)="changeService('restart', result)" [class.disabled]="!result.can_restart" class="btn btn-primary">Restart</button>
     </div>
-    <div *ngIf="!minimal" class="col-md-1 text-center">
+    <div *ngIf="!minimal" class="col-md-1 col-sm-4 col-xs-12 text-center">
         <button (click)="changeService('start', result)" class="btn btn-success">Start</button>
     </div>
-    <div *ngIf="!minimal" class="col-md-1 text-center">
+    <div *ngIf="!minimal" class="col-md-1 col-sm-4 col-xs-12 text-center">
         <button (click)="changeService('stop', result)" class="btn btn-danger">Stop</button>
     </div>
 </div>
