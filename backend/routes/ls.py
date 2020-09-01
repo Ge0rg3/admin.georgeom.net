@@ -51,7 +51,7 @@ def parse_ls(foldername):
             raise RuntimeError(error)
     ls_results = re.findall(LS_PARSER_REGEX, output)
     # Get real file/folder sizes with du
-    command = ["du", "-ax", foldername, "-d", "1"]
+    command = ["du", "-ax", foldername, "-d", "1", "-b"]
     try:
         output = sp.check_output(command, stderr=sp.DEVNULL).decode()
     except sp.CalledProcessError as e:
