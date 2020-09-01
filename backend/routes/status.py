@@ -145,9 +145,9 @@ SERVICES = [
         "description": "Allows remote SSH connections to the server.",
         "status_mapping": [check_remote_port, [PUBLIC_SERVER_IP, 22]],
         "commands": {
-            "stop": "sudo /usr/sbin/service ssh stop",
-            "start": "sudo /usr/sbin/service ssh start",
-            "restart": "sudo /usr/sbin/service ssh restart"
+            "stop": ["sudo /usr/sbin/service ssh stop"],
+            "start": ["sudo /usr/sbin/service ssh start"],
+            "restart": ["sudo /usr/sbin/service ssh restart"]
         }
     }
 ]
