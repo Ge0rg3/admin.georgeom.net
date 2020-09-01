@@ -11,6 +11,11 @@ import re
 status_module = Blueprint('status_module', __name__)
 # Port regex
 PORT_REGEX = re.compile(r"(?:\d+\.\d+\.\d+\.\d+:)(\d+)")
+# Server public IP address
+s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+s.connect(("8.8.8.8", 80))
+PUBLIC_SERVER_IP = s.getsockname()[0]
+s.close()
 
 
 # Check that a port is up on any given IP
@@ -52,7 +57,7 @@ SERVICES = [
         "id": "website",
         "name": "Website",
         "description": "The https://georgeom.net homepage.",
-        "status_mapping": [check_website, "https://georgeom.net"],
+        "status_mapping": [check_website, ["https://georgeom.net"]],
         "commands": {
             "stop": [f"sudo {RM} {SITES_ENABLED}nextcloud.conf",
                      RESTART_NGINX],
@@ -66,7 +71,7 @@ SERVICES = [
         "id": "kf2-admin",
         "name": "KF2 Admin",
         "description": "The https://kf2.georgeom.net admin portal.",
-        "status_mapping": [check_website, "https://kf2.georgeom.net"],
+        "status_mapping": [check_website, ["https://kf2.georgeom.net"]],
         "commands": {
             "stop": [f"sudo {RM} {SITES_ENABLED}kf2.conf", RESTART_NGINX],
             "start": [f"sudo {LN} -s {SITES_AVAILABLE}" +
@@ -79,7 +84,7 @@ SERVICES = [
         "id": "kf2-game",
         "name": "KF2 Game",
         "description": "KF2 gameserver at port 7777.",
-        "status_mapping": [check_local_port, 7777],
+        "status_mapping": [check_local_port, [7777]],
         "commands": {
             "stop": [f"sudo {SU} - kf2server - " +
                      "/home/kf2server/kf2server stop"],
@@ -93,7 +98,7 @@ SERVICES = [
         "id": "minecraft",
         "name": "Minecraft",
         "description": "Minecraft server at port 25565.",
-        "status_mapping": [check_local_port, 25565],
+        "status_mapping": [check_remote_port, [PUBLIC_SERVER_IP, 25565]],
         "commands": {
             "stop": [f"sudo {SU} - mcserver - " +
                      "/home/mcserver/mcserver stop"],
@@ -108,7 +113,7 @@ SERVICES = [
         "name": "Nextcloud",
         "description": "Nextcloud instance hosted at " +
                 "https://cloud.georgeom.net.",
-        "status_mapping": [check_website, "https://cloud.georgeom.net"],
+        "status_mapping": [check_website, ["https://cloud.georgeom.net"]],
         "commands": {
             "stop": [f"sudo {RM} {SITES_ENABLED}nextcloud.conf",
                      RESTART_NGINX],
@@ -124,7 +129,7 @@ SERVICES = [
         "description": "StegOnline static site hosted at " +
                 "https://stegonline.georgeom.net. " +
                 "Restart triggers nginx service restart.",
-        "status_mapping": [check_website, "https://stegonline.georgeom.net"],
+        "status_mapping": [check_website, ["https://stegonline.georgeom.net"]],
         "commands": {
             "stop": [f"sudo {RM} " +
                      f"{SITES_ENABLED}stegonline.conf", RESTART_NGINX],
@@ -132,6 +137,17 @@ SERVICES = [
                       f"stegonline.conf {SITES_ENABLED}stegonline.conf",
                       RESTART_NGINX],
             "restart": []
+        }
+    },
+    {
+        "id": "ssh",
+        "name": "SSH",
+        "description": "Allows remote SSH connections to the server.",
+        "status_mapping": [check_remote_port, [PUBLIC_SERVER_IP, 22]],
+        "commands": {
+            "stop": "sudo /usr/sbin/service ssh stop",
+            "start": "sudo /usr/sbin/service ssh start",
+            "restart": "sudo /usr/sbin/service ssh restart"
         }
     }
 ]
@@ -147,7 +163,7 @@ def checkStatus():
             "id": service["id"],
             "name": service["name"],
             "description": service["description"],
-            "status": status_map[0](status_map[1]),
+            "status": status_map[0](*(status_map[1])),
             "can_restart": service["commands"]["restart"] != []
         })
     return {

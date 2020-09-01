@@ -37,6 +37,10 @@ server {
 ## Permissions
 This service needs a bunch of permissions, but we don't want RCE if someone logs in. As such, the following entries have been added to the sudoers file:
 ```
+# ssh permissions
+george ALL=NOPASSWD: /usr/sbin/service ssh stop
+george ALL=NOPASSWD: /usr/sbin/service ssh start
+george ALL=NOPASSWD: /usr/sbin/service ssh reload
 # nginx service permissions
 george ALL=NOPASSWD: /usr/sbin/nginx -s reload
 # nginx sites permissions
