@@ -8,7 +8,7 @@ import socket
 import re
 
 # Setup module
-status_module = Blueprint('status_module', __name__)
+services_module = Blueprint('services_module', __name__)
 # Port regex
 PORT_REGEX = re.compile(r"(?:\d+\.\d+\.\d+\.\d+:)(\d+)")
 # Server public IP address
@@ -52,17 +52,17 @@ RESTART_NGINX = "sudo /usr/sbin/nginx -s reload"
 SITES_AVAILABLE = "/etc/nginx/sites-available/"
 SITES_ENABLED = "/etc/nginx/sites-enabled/"
 
-SERVICES = [
+COMMON_SERVICES = [
     {
         "id": "website",
         "name": "Website",
         "description": "The https://georgeom.net homepage.",
         "status_mapping": [check_website, ["https://georgeom.net"]],
         "commands": {
-            "stop": [f"sudo {RM} {SITES_ENABLED}nextcloud.conf",
+            "stop": [f"sudo {RM} {SITES_ENABLED}georgeom.net.conf",
                      RESTART_NGINX],
             "start": [f"sudo {LN} -s {SITES_AVAILABLE}" +
-                      f"nextcloud.conf {SITES_ENABLED}nextcloud.conf",
+                      f"georgeom.net.conf {SITES_ENABLED}georgeom.net.conf",
                       RESTART_NGINX],
             "restart": []
         }
@@ -153,35 +153,89 @@ SERVICES = [
 ]
 
 
-# Get statuses
-@status_module.route("/status", methods=["GET"])
-def checkStatus():
+# Return all system services as a dict
+def get_system_services():
+    # Get command output
+    command = ["service", "--status-all"]
+    output = sp.check_output(command, stderr=sp.STDOUT).decode().strip()
+    # Parse output to dict
+    services = []
+    for line in output.split("\n"):
+        line = line.strip()
+        status_symbol, service = line.split(" ]  ")
+        status_symbol = status_symbol[-1]
+        if status_symbol == "+":
+            status = "on"
+        elif status_symbol == "-":
+            status = "off"
+        else:
+            status = "unknown"
+        services.append({
+            "type": "system",
+            "name": service,
+            "id": service,
+            "status": status,
+            "description": "",
+            "startable": status != "unknown",
+            "stoppable": status != "unknown",
+            "restartable": status != "unknown"
+        })
+    return services
+
+
+# Return all common services as dicts
+def get_common_services():
     service_dicts = []
-    for service in SERVICES:
+    for service in COMMON_SERVICES:
         status_map = service["status_mapping"]
+        status_bool = status_map[0](*(status_map[1]))
+        if status_bool:
+            status = "on"
+        else:
+            status = "off"
         service_dicts.append({
+            "type": "common",
             "id": service["id"],
             "name": service["name"],
             "description": service["description"],
-            "status": status_map[0](*(status_map[1])),
-            "can_restart": service["commands"]["restart"] != []
+            "status": status,
+            "startable": service["commands"]["start"] != [],
+            "stoppable": service["commands"]["stop"] != [],
+            "restartable": service["commands"]["restart"] != []
         })
+    return service_dicts
+
+
+# Get all statuses
+@services_module.route("/services/all", methods=["GET"])
+def getAllServices():
+    common = get_common_services()
+    system = get_system_services()
     return {
         "status": 200,
-        "results": service_dicts
+        "results": common + system
+    }
+
+
+# Get common statuses
+@services_module.route("/services/common", methods=["GET"])
+def getCommonServices():
+    return {
+        "status": 200,
+        "results": get_common_services()
     }, 200
 
 
-# Stop/start/restart
-@status_module.route("/status/<action>/<service_id>")
-def stopService(action, service_id):
+# Stop/start/restart a common service
+@services_module.route("/services/common/<action>/<service_id>")
+def changeCommonService(action, service_id):
     if action not in ["start", "stop", "restart"]:
         return {
             "status": 400,
             "error": "Action must be start/stop/restart."
         }, 400
     # Get service commands
-    for service in SERVICES:
+    for service in COMMON_SERVICES:
         if service["id"] == service_id:
             commands = []
             for command in service["commands"][action]:
@@ -203,6 +257,46 @@ def stopService(action, service_id):
                     "error": f"Error when {action}ing service.",
                     "output": e.output
                 }, 500
+    return {
+        "status": 200
+    }, 200
+
+
+# Get all system services
+@services_module.route("/services/system")
+def getSystemServices():
+    return {
+        "status": 200,
+        "results": get_system_services()
+    }
+
+
+# Start/stop/restart a system service
+@services_module.route("/services/system/<action>/<service_id>")
+def changeSystemService(action, service_id):
+    # Validate action
+    if action not in ["start", "stop", "restart"]:
+        return {
+            "status": 400,
+            "error": "Action must be start/stop/restart."
+        }, 400
+    # Validate service_id
+    service_ids = [service["id"] for service in get_system_services()]
+    if service_id not in service_ids:
+        return {
+            "status": 400,
+            "error": "Invalid service id."
+        }, 400
+    # Execute command
+    command = ["sudo", "service", service_id, action]
+    try:
+        sp.check_output(command)
+    except sp.CalledProcessError as e:
+        return {
+            "status": 500,
+            "error": f"Could not {action} service.",
+            "output": e.output
+        }
     return {
         "status": 200
     }, 200

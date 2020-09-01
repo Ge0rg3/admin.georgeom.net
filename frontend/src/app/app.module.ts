@@ -13,8 +13,8 @@ import { SidebarComponent } from './common/components/sidebar/sidebar.component'
 import { HomeComponent } from './pages/home/home.component';
 import { DiskspaceChartComponent } from './common/components/diskspace/diskspace-chart.component';
 import { DiskspaceComponent } from './pages/diskspace/diskspace.component';
-import { StatusComponent } from './pages/status/status.component';
-import { StatusRows } from './common/components/status/status-rows.component';
+import { ServicesComponent } from './pages/services/services.component';
+import { ServiceRows } from './common/components/service-rows/service-rows.component';
 import { LoginComponent } from './pages/login/login.component';
 import { ProcessChartComponent } from './common/components/process-chart/process-chart.component';
 import { ProcessesComponent } from './pages/processes/processes.component';
@@ -29,8 +29,8 @@ import { ProtectedDirective } from './common/directives/protected.directive';
     HomeComponent,
     DiskspaceChartComponent,
     DiskspaceComponent,
-    StatusComponent,
-    StatusRows,
+    ServicesComponent,
+    ServiceRows,
     LoginComponent,
     ProtectedDirective,
     ProcessChartComponent,

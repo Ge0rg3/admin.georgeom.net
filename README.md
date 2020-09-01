@@ -37,6 +37,9 @@ server {
 ## Permissions
 This service needs a bunch of permissions, but we don't want RCE if someone logs in. As such, the following entries have been added to the sudoers file:
 ```
+## Note: These permissions grant a user a high passwordless level of access to the machine, so ensure user permissions are setup appropriately.
+# service permissions
+george ALL=NOPASSWD: /usr/sbin/service *
 # ssh permissions
 george ALL=NOPASSWD: /usr/sbin/service ssh stop
 george ALL=NOPASSWD: /usr/sbin/service ssh start

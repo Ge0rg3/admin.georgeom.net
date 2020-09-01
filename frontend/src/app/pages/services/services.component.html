@@ -1,0 +1,27 @@
+<div protected class="container-fluid">
+    <!-- Row 1 -->
+    <div class="row bubble">
+        <!-- Header -->
+        <div class="col-md-12">
+            <h2 class="mt-0">Services</h2>
+        </div>
+    </div>
+
+    <!-- Common bubble -->
+    <div class="row bubble">
+        <div class="col-md-12 text-center">
+            <h4>Common Services</h4>
+        </div>
+        <hr>
+        <service-rows [services]="commonServices" [minimal]="false"></service-rows>
+    </div>
+    
+    <!-- System bubble -->
+    <div class="row bubble">
+        <div class="col-md-12 text-center">
+            <h4>System Services</h4>
+        </div>
+        <hr>
+        <service-rows [services]="systemServices" [minimal]="false"></service-rows>
+    </div>
+</div>

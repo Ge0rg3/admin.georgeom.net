@@ -21,13 +21,13 @@
       </div>
     </div>
 
-    <!-- Server Status -->
+    <!-- Services -->
     <div class="bubble standard-bubble-height col-md-5 col-sm-12 col-xs-12">
       <div class="inner">
         <!-- Header -->
-        <div routerLink="/status" class="row hover-fade">
+        <div routerLink="/services" class="row hover-fade">
           <div class="col-md-6">
-            <h3>Service Status List</h3>
+            <h3>Services</h3>
           </div>
           <div class="col-md-1 col-md-offset-5 hidden-sm hidden-xs">
             <h3><i class="material-icons">launch</i></h3>
@@ -35,7 +35,7 @@
         </div>
         <hr>
         <!-- Chart -->
-        <status-rows></status-rows>
+        <service-rows [services]="services" [minimal]="true"></service-rows>
       </div>
     </div>
 

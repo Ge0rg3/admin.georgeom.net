@@ -5,7 +5,7 @@ from flask_cors import CORS
 
 # Route imports
 from routes.ls import ls_module
-from routes.status import status_module
+from routes.services import services_module
 from routes.login import login_module
 from routes.top import top_module
 from routes.sar import sar_module
@@ -33,7 +33,7 @@ with open(SCRIPT_FILEPATH + "/auth/token.txt", "w") as f:
 
 # Add routes
 app.register_blueprint(ls_module, url_prefix=APP_ROOT)
-app.register_blueprint(status_module, url_prefix=APP_ROOT)
+app.register_blueprint(services_module, url_prefix=APP_ROOT)
 app.register_blueprint(login_module, url_prefix=APP_ROOT)
 app.register_blueprint(top_module, url_prefix=APP_ROOT)
 app.register_blueprint(sar_module, url_prefix=APP_ROOT)
@@ -42,7 +42,6 @@ app.register_blueprint(sar_module, url_prefix=APP_ROOT)
 # Serve frontend & check auth on backend
 @app.before_request
 def before_request():
-    print(request.path)
     """
     Serve frontend
     """
