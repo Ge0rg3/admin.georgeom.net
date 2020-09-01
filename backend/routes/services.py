@@ -156,7 +156,7 @@ COMMON_SERVICES = [
 # Return all system services as a dict
 def get_system_services():
     # Get command output
-    command = ["service", "--status-all"]
+    command = ["/usr/sbin/service", "--status-all"]
     output = sp.check_output(command, stderr=sp.STDOUT).decode().strip()
     # Parse output to dict
     services = []
