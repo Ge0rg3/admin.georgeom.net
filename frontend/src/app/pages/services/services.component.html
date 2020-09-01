@@ -13,7 +13,7 @@
             <h4>Common Services</h4>
         </div>
         <hr>
-        <service-rows [services]="commonServices" [minimal]="false"></service-rows>
+        <service-rows [services]="commonServices" [minimal]="false" (serviceChanged)="catchServiceChange($event)"></service-rows>
     </div>
     
     <!-- System bubble -->
@@ -22,6 +22,26 @@
             <h4>System Services</h4>
         </div>
         <hr>
-        <service-rows [services]="systemServices" [minimal]="false"></service-rows>
+        <service-rows [services]="systemServices" [minimal]="false" (serviceChanged)="catchServiceChange($event)"></service-rows>
+    </div>
+</div>
+
+<!-- Stop/start/restart success modal -->
+<button #modalTrigger class="d-none" data-toggle="modal" data-target="#modal">
+    <!-- This button does not appear on the page, it is triggered through JS to load the modal with bootstrap's modal feature -->
+</button>
+  
+<!-- Modal -->
+<div class="modal fade" id="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <h5>Triggered {{ modalDetails.action }} action to {{ modalDetails.service }} service.</h5>
+                <p [class.success]="modalDetails.response_code === 200" [class.fail]="modalDetails.response_code !== 200">Response Status: {{ modalDetails.response_code }}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal">Close</button>
+            </div>
+        </div>
     </div>
 </div>

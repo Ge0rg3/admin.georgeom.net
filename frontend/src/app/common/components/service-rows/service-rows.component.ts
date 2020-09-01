@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { ServicesService } from '../../services/services.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { ServicesService } from '../../services/services.service';
 export class ServiceRows {
   @Input() services: any[];
   @Input() minimal: boolean = true;
-  @ViewChild("modalTrigger") modalTrigger;
+  @Output() serviceChanged = new EventEmitter<any>();
   public modalDetails: any = {};
 
   constructor(private servicesApi: ServicesService) { }
@@ -29,10 +29,11 @@ export class ServiceRows {
     let apiCall = changeType + serviceType + "Service";
     // Trigger call
     this.servicesApi[apiCall](service.id).then((response) => {
-      this.modalDetails.response_code = response.status;
-      this.modalDetails.action = changeType;
-      this.modalDetails.service = service.name;
-      this.modalTrigger.nativeElement.click();
+      this.serviceChanged.emit({
+        "response_code": response.status,
+        "action": changeType,
+        "service": service.name
+      });
     })
   }
 

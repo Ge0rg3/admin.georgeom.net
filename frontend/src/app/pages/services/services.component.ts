@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ServicesService } from 'src/app/common/services/services.service';
 
 @Component({
@@ -8,8 +8,14 @@ import { ServicesService } from 'src/app/common/services/services.service';
 })
 export class ServicesComponent implements OnInit {
 
+  @ViewChild("modalTrigger") modalTrigger;
   public commonServices: any[] = [];
   public systemServices: any[] = [];
+  public modalDetails: any = {
+    "action": "",
+    "response_code": "null",
+    "service": ""
+  };
 
   constructor(private servicesApi: ServicesService) { }
 
@@ -28,6 +34,10 @@ export class ServicesComponent implements OnInit {
     });
   }
 
-
+  // Set modal details and open modal
+  public catchServiceChange(details: any): void {
+    this.modalDetails = details;
+    this.modalTrigger.nativeElement.click();
+  }
 
 }
