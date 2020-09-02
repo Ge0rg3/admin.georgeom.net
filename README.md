@@ -16,6 +16,8 @@ The following commands will create such an account:
 ```
 sudo useradd -M dashboard
 sudo usermod -L dashboard
+sudo usermod -aG www-data dashboard
+sudo usermod -aG sudo dashboard
 ```
 The following will then need to be added to the sudoers file:
 ```

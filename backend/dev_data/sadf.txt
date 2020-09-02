@@ -1,0 +1,894 @@
+{"sysstat": {
+        "hosts": [
+                {
+                        "nodename": "maindroplet",
+                        "sysname": "Linux",
+                        "release": "5.4.0-42-generic",
+                        "machine": "x86_64",
+                        "number-of-cpus": 2,
+                        "file-date": "2020-08-27",
+                        "file-utc-time": "00:00:01",
+                        "timezone": "UTC",
+                        "statistics": [
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "00:05:01", "utc": 1, "interval": 300},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.73, "nice": 0.04, "system": 1.28, "iowait": 0.14, "steal": 4.02, "idle": 89.79}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "00:15:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.53, "nice": 0.00, "system": 1.12, "iowait": 0.05, "steal": 2.45, "idle": 91.84}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "00:25:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.47, "nice": 0.00, "system": 1.08, "iowait": 0.04, "steal": 1.18, "idle": 93.22}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "00:35:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.47, "nice": 0.00, "system": 1.06, "iowait": 0.04, "steal": 1.08, "idle": 93.34}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "00:45:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.38, "nice": 0.00, "system": 1.06, "iowait": 0.05, "steal": 0.86, "idle": 93.64}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "00:55:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.34, "nice": 0.00, "system": 1.03, "iowait": 0.04, "steal": 0.67, "idle": 93.91}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "01:05:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.43, "nice": 0.00, "system": 1.06, "iowait": 0.05, "steal": 1.13, "idle": 93.34}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "01:15:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.55, "nice": 0.00, "system": 1.12, "iowait": 0.05, "steal": 0.95, "idle": 93.33}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "01:25:02", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.45, "nice": 0.00, "system": 1.03, "iowait": 0.04, "steal": 0.93, "idle": 93.55}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "01:35:01", "utc": 1, "interval": 599},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.26, "nice": 0.00, "system": 1.05, "iowait": 0.04, "steal": 0.83, "idle": 93.83}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "01:45:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.19, "nice": 0.00, "system": 1.01, "iowait": 0.04, "steal": 0.83, "idle": 93.92}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "01:55:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.17, "nice": 0.00, "system": 0.98, "iowait": 0.02, "steal": 0.61, "idle": 94.22}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "02:05:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.19, "nice": 0.00, "system": 0.97, "iowait": 0.03, "steal": 0.60, "idle": 94.21}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "02:15:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.06, "nice": 0.00, "system": 0.94, "iowait": 0.03, "steal": 0.51, "idle": 94.46}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "02:25:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 3.92, "nice": 0.00, "system": 0.92, "iowait": 0.03, "steal": 0.35, "idle": 94.79}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "02:35:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 3.90, "nice": 0.00, "system": 0.87, "iowait": 0.03, "steal": 0.43, "idle": 94.78}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "02:45:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 3.96, "nice": 0.00, "system": 0.89, "iowait": 0.03, "steal": 0.46, "idle": 94.65}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "02:55:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 3.92, "nice": 0.00, "system": 0.89, "iowait": 0.02, "steal": 0.48, "idle": 94.70}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "03:05:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 3.95, "nice": 0.00, "system": 0.91, "iowait": 0.02, "steal": 0.50, "idle": 94.62}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "03:15:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.22, "nice": 0.00, "system": 1.01, "iowait": 0.03, "steal": 0.91, "idle": 93.83}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "03:25:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.15, "nice": 0.00, "system": 1.01, "iowait": 0.03, "steal": 0.71, "idle": 94.10}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "03:35:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.21, "nice": 0.00, "system": 1.01, "iowait": 0.03, "steal": 1.20, "idle": 93.56}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "03:45:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.12, "nice": 0.00, "system": 0.96, "iowait": 0.02, "steal": 0.75, "idle": 94.15}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "03:55:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.11, "nice": 0.00, "system": 0.96, "iowait": 0.03, "steal": 0.72, "idle": 94.18}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "04:05:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.09, "nice": 0.00, "system": 0.96, "iowait": 0.03, "steal": 0.62, "idle": 94.30}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "04:15:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 3.99, "nice": 0.00, "system": 0.96, "iowait": 0.02, "steal": 0.36, "idle": 94.67}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "04:25:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 3.95, "nice": 0.00, "system": 0.91, "iowait": 0.03, "steal": 0.37, "idle": 94.74}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "04:35:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 3.99, "nice": 0.00, "system": 0.91, "iowait": 0.06, "steal": 0.53, "idle": 94.51}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "04:45:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 3.97, "nice": 0.00, "system": 0.93, "iowait": 0.03, "steal": 0.41, "idle": 94.66}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "04:55:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 3.90, "nice": 0.00, "system": 0.91, "iowait": 0.03, "steal": 0.40, "idle": 94.75}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "05:05:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 3.89, "nice": 0.00, "system": 0.92, "iowait": 0.02, "steal": 0.44, "idle": 94.73}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "05:15:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.18, "nice": 0.00, "system": 1.04, "iowait": 0.03, "steal": 0.58, "idle": 94.17}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "05:25:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.02, "nice": 0.00, "system": 0.97, "iowait": 0.02, "steal": 0.27, "idle": 94.72}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "05:35:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 3.98, "nice": 0.00, "system": 0.97, "iowait": 0.05, "steal": 0.37, "idle": 94.63}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "05:45:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 3.91, "nice": 0.00, "system": 0.98, "iowait": 0.03, "steal": 0.24, "idle": 94.84}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "05:55:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 3.97, "nice": 0.00, "system": 0.93, "iowait": 0.03, "steal": 0.41, "idle": 94.67}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "06:05:02", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 3.96, "nice": 0.00, "system": 1.00, "iowait": 0.05, "steal": 0.49, "idle": 94.50}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "06:15:01", "utc": 1, "interval": 599},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.04, "nice": 0.00, "system": 0.99, "iowait": 0.05, "steal": 0.57, "idle": 94.34}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "06:25:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.30, "nice": 0.07, "system": 0.99, "iowait": 0.03, "steal": 0.55, "idle": 94.05}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "06:35:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.17, "nice": 0.00, "system": 1.02, "iowait": 0.10, "steal": 1.52, "idle": 93.19}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "06:45:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.07, "nice": 0.00, "system": 0.98, "iowait": 0.02, "steal": 0.66, "idle": 94.26}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "06:55:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.08, "nice": 0.00, "system": 1.01, "iowait": 0.05, "steal": 0.73, "idle": 94.13}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "07:05:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.10, "nice": 0.00, "system": 1.01, "iowait": 0.03, "steal": 0.74, "idle": 94.12}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "07:15:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.16, "nice": 0.00, "system": 1.04, "iowait": 0.02, "steal": 0.72, "idle": 94.05}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "07:25:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.21, "nice": 0.00, "system": 1.06, "iowait": 0.04, "steal": 0.62, "idle": 94.07}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "07:35:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.13, "nice": 0.00, "system": 1.03, "iowait": 0.04, "steal": 0.61, "idle": 94.20}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "07:45:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.10, "nice": 0.00, "system": 1.04, "iowait": 0.03, "steal": 0.49, "idle": 94.34}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "07:55:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.08, "nice": 0.00, "system": 1.02, "iowait": 0.03, "steal": 0.84, "idle": 94.03}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "08:05:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.17, "nice": 0.00, "system": 0.99, "iowait": 0.04, "steal": 1.13, "idle": 93.67}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "08:15:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.24, "nice": 0.00, "system": 1.12, "iowait": 0.05, "steal": 1.48, "idle": 93.10}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "08:25:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.09, "nice": 0.00, "system": 1.04, "iowait": 0.04, "steal": 0.80, "idle": 94.03}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "08:35:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.06, "nice": 0.00, "system": 1.00, "iowait": 0.03, "steal": 0.65, "idle": 94.26}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "08:45:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.03, "nice": 0.00, "system": 0.96, "iowait": 0.04, "steal": 0.40, "idle": 94.57}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "08:55:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 3.87, "nice": 0.00, "system": 0.93, "iowait": 0.04, "steal": 0.21, "idle": 94.96}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "09:05:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.01, "nice": 0.00, "system": 0.98, "iowait": 0.04, "steal": 0.59, "idle": 94.38}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "09:15:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 3.94, "nice": 0.00, "system": 0.98, "iowait": 0.03, "steal": 0.49, "idle": 94.55}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "09:25:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 3.89, "nice": 0.00, "system": 0.92, "iowait": 0.03, "steal": 0.31, "idle": 94.85}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "09:35:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 3.94, "nice": 0.00, "system": 0.95, "iowait": 0.03, "steal": 0.46, "idle": 94.63}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "09:45:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 3.99, "nice": 0.00, "system": 0.97, "iowait": 0.03, "steal": 0.67, "idle": 94.34}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "09:55:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 6.46, "nice": 0.00, "system": 1.09, "iowait": 0.04, "steal": 0.58, "idle": 91.83}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "10:05:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 11.40, "nice": 0.00, "system": 1.51, "iowait": 0.17, "steal": 1.14, "idle": 85.78}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "10:15:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 16.01, "nice": 0.00, "system": 1.75, "iowait": 0.06, "steal": 1.68, "idle": 80.50}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "10:25:01", "utc": 1, "interval": 599},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 8.89, "nice": 0.00, "system": 1.38, "iowait": 0.17, "steal": 1.24, "idle": 88.32}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "10:35:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.70, "nice": 0.00, "system": 1.06, "iowait": 0.08, "steal": 0.20, "idle": 93.95}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "10:45:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 3.91, "nice": 0.00, "system": 1.04, "iowait": 0.07, "steal": 0.51, "idle": 94.47}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "10:55:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 3.92, "nice": 0.00, "system": 1.02, "iowait": 0.07, "steal": 0.59, "idle": 94.40}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "11:05:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 3.94, "nice": 0.00, "system": 0.99, "iowait": 0.18, "steal": 0.33, "idle": 94.55}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "11:15:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.16, "nice": 0.00, "system": 1.12, "iowait": 0.07, "steal": 1.11, "idle": 93.54}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "11:25:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 3.87, "nice": 0.00, "system": 1.01, "iowait": 0.05, "steal": 0.12, "idle": 94.95}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "11:35:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 3.98, "nice": 0.00, "system": 1.00, "iowait": 0.15, "steal": 0.28, "idle": 94.58}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "11:45:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 3.91, "nice": 0.00, "system": 1.02, "iowait": 0.04, "steal": 0.22, "idle": 94.80}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "11:55:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 3.82, "nice": 0.00, "system": 1.00, "iowait": 0.03, "steal": 0.16, "idle": 94.99}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "12:05:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 3.93, "nice": 0.00, "system": 0.98, "iowait": 0.04, "steal": 0.31, "idle": 94.74}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "12:15:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.03, "nice": 0.00, "system": 1.02, "iowait": 0.06, "steal": 0.63, "idle": 94.25}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "12:25:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 3.87, "nice": 0.00, "system": 0.97, "iowait": 0.04, "steal": 0.23, "idle": 94.89}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "12:35:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 3.94, "nice": 0.00, "system": 0.98, "iowait": 0.05, "steal": 0.23, "idle": 94.80}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "12:45:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 3.98, "nice": 0.00, "system": 1.00, "iowait": 0.04, "steal": 0.18, "idle": 94.80}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "12:55:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.13, "nice": 0.00, "system": 1.09, "iowait": 0.05, "steal": 1.08, "idle": 93.66}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "13:05:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.04, "nice": 0.00, "system": 1.10, "iowait": 0.06, "steal": 1.35, "idle": 93.46}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "13:15:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.11, "nice": 0.00, "system": 1.08, "iowait": 0.05, "steal": 0.45, "idle": 94.30}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "13:25:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.06, "nice": 0.00, "system": 1.04, "iowait": 0.05, "steal": 0.95, "idle": 93.89}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "13:35:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.05, "nice": 0.00, "system": 1.11, "iowait": 0.08, "steal": 3.88, "idle": 90.88}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "13:45:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.19, "nice": 0.00, "system": 1.15, "iowait": 0.06, "steal": 1.74, "idle": 92.87}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "13:55:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.11, "nice": 0.00, "system": 1.08, "iowait": 0.05, "steal": 1.89, "idle": 92.88}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "14:05:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.06, "nice": 0.00, "system": 1.05, "iowait": 0.04, "steal": 0.69, "idle": 94.14}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "14:15:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.08, "nice": 0.00, "system": 1.04, "iowait": 0.05, "steal": 0.46, "idle": 94.37}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "14:25:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.03, "nice": 0.00, "system": 1.02, "iowait": 0.05, "steal": 0.99, "idle": 93.91}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "14:35:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 3.94, "nice": 0.00, "system": 1.01, "iowait": 0.04, "steal": 0.38, "idle": 94.62}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "14:45:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.12, "nice": 0.00, "system": 1.09, "iowait": 0.04, "steal": 0.66, "idle": 94.09}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "14:55:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.01, "nice": 0.00, "system": 1.05, "iowait": 0.05, "steal": 0.99, "idle": 93.90}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "15:05:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.09, "nice": 0.00, "system": 1.08, "iowait": 0.05, "steal": 0.98, "idle": 93.80}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "15:15:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.01, "nice": 0.00, "system": 1.03, "iowait": 0.04, "steal": 0.97, "idle": 93.96}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "15:25:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.06, "nice": 0.00, "system": 1.09, "iowait": 0.04, "steal": 0.61, "idle": 94.19}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "15:35:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.00, "nice": 0.00, "system": 1.07, "iowait": 0.07, "steal": 1.89, "idle": 92.98}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "15:45:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.06, "nice": 0.00, "system": 1.09, "iowait": 0.05, "steal": 3.10, "idle": 91.70}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "15:55:02", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.08, "nice": 0.00, "system": 1.05, "iowait": 0.04, "steal": 1.97, "idle": 92.86}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "16:05:01", "utc": 1, "interval": 599},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 3.99, "nice": 0.00, "system": 1.08, "iowait": 0.04, "steal": 1.20, "idle": 93.69}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "16:15:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.76, "nice": 0.33, "system": 1.35, "iowait": 0.10, "steal": 1.85, "idle": 91.60}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "16:25:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.18, "nice": 0.00, "system": 1.09, "iowait": 0.04, "steal": 1.68, "idle": 93.01}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "16:35:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.20, "nice": 0.00, "system": 1.12, "iowait": 0.07, "steal": 2.81, "idle": 91.80}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "16:45:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.22, "nice": 0.00, "system": 1.11, "iowait": 0.06, "steal": 2.08, "idle": 92.53}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "16:55:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.27, "nice": 0.00, "system": 1.13, "iowait": 0.07, "steal": 0.59, "idle": 93.94}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "17:05:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.48, "nice": 0.00, "system": 1.26, "iowait": 0.09, "steal": 0.55, "idle": 93.62}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "17:15:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.60, "nice": 0.00, "system": 1.34, "iowait": 0.07, "steal": 1.29, "idle": 92.70}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "17:25:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.56, "nice": 0.00, "system": 1.32, "iowait": 0.05, "steal": 1.00, "idle": 93.08}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "17:35:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.35, "nice": 0.00, "system": 1.22, "iowait": 0.06, "steal": 0.39, "idle": 93.99}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "17:45:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.31, "nice": 0.00, "system": 1.21, "iowait": 0.07, "steal": 0.15, "idle": 94.26}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "17:55:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.35, "nice": 0.00, "system": 1.22, "iowait": 0.07, "steal": 0.48, "idle": 93.88}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "18:05:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.09, "nice": 0.00, "system": 1.13, "iowait": 0.05, "steal": 0.42, "idle": 94.31}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "18:15:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 3.89, "nice": 0.00, "system": 0.97, "iowait": 0.08, "steal": 0.26, "idle": 94.80}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "18:25:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.03, "nice": 0.00, "system": 0.95, "iowait": 0.05, "steal": 0.39, "idle": 94.57}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "18:35:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.14, "nice": 0.00, "system": 1.04, "iowait": 0.06, "steal": 1.04, "idle": 93.73}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "18:45:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.24, "nice": 0.00, "system": 1.05, "iowait": 0.06, "steal": 1.61, "idle": 93.05}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "18:55:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 3.97, "nice": 0.00, "system": 0.98, "iowait": 0.04, "steal": 0.23, "idle": 94.78}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "19:05:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 3.95, "nice": 0.00, "system": 0.99, "iowait": 0.04, "steal": 0.31, "idle": 94.70}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "19:15:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 3.99, "nice": 0.00, "system": 1.03, "iowait": 0.04, "steal": 0.50, "idle": 94.44}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "19:25:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.00, "nice": 0.00, "system": 1.01, "iowait": 0.08, "steal": 0.50, "idle": 94.40}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "19:35:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 9.88, "nice": 0.00, "system": 1.39, "iowait": 0.06, "steal": 1.57, "idle": 87.09}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "19:45:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 12.72, "nice": 0.00, "system": 1.67, "iowait": 0.06, "steal": 2.86, "idle": 82.69}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "19:55:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 13.68, "nice": 0.00, "system": 1.64, "iowait": 0.10, "steal": 1.47, "idle": 83.10}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "20:05:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 7.70, "nice": 0.00, "system": 1.28, "iowait": 0.09, "steal": 0.88, "idle": 90.06}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "20:15:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 5.67, "nice": 0.00, "system": 1.22, "iowait": 0.21, "steal": 0.34, "idle": 92.55}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "20:25:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.25, "nice": 0.00, "system": 1.07, "iowait": 0.05, "steal": 0.49, "idle": 94.15}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "20:35:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.12, "nice": 0.00, "system": 1.01, "iowait": 0.05, "steal": 0.20, "idle": 94.62}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "20:45:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 3.90, "nice": 0.00, "system": 0.90, "iowait": 0.04, "steal": 0.11, "idle": 95.05}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "20:55:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.09, "nice": 0.00, "system": 1.02, "iowait": 0.04, "steal": 0.19, "idle": 94.66}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "21:05:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.12, "nice": 0.00, "system": 1.02, "iowait": 0.04, "steal": 0.73, "idle": 94.08}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "21:15:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.08, "nice": 0.00, "system": 1.00, "iowait": 0.04, "steal": 0.38, "idle": 94.51}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "21:25:01", "utc": 1, "interval": 599},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.07, "nice": 0.00, "system": 1.00, "iowait": 0.05, "steal": 0.45, "idle": 94.43}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "21:35:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.17, "nice": 0.00, "system": 1.06, "iowait": 0.04, "steal": 0.59, "idle": 94.15}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "21:45:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.27, "nice": 0.00, "system": 1.05, "iowait": 0.04, "steal": 1.01, "idle": 93.63}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "21:55:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.19, "nice": 0.00, "system": 1.01, "iowait": 0.13, "steal": 0.71, "idle": 93.96}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "22:05:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.36, "nice": 0.00, "system": 1.14, "iowait": 0.05, "steal": 2.20, "idle": 92.25}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "22:15:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.15, "nice": 0.00, "system": 1.10, "iowait": 0.05, "steal": 0.77, "idle": 93.93}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "22:25:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.16, "nice": 0.00, "system": 1.03, "iowait": 0.04, "steal": 0.29, "idle": 94.47}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "22:35:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.04, "nice": 0.00, "system": 0.96, "iowait": 0.04, "steal": 0.25, "idle": 94.71}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "22:45:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 3.97, "nice": 0.00, "system": 0.98, "iowait": 0.04, "steal": 0.17, "idle": 94.84}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "22:55:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 3.92, "nice": 0.00, "system": 0.95, "iowait": 0.04, "steal": 0.14, "idle": 94.95}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "23:05:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.06, "nice": 0.00, "system": 0.98, "iowait": 0.04, "steal": 0.47, "idle": 94.45}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "23:15:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.18, "nice": 0.00, "system": 1.07, "iowait": 0.05, "steal": 0.81, "idle": 93.88}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "23:25:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.00, "nice": 0.00, "system": 1.03, "iowait": 0.04, "steal": 0.22, "idle": 94.71}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "23:35:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 4.08, "nice": 0.00, "system": 1.03, "iowait": 0.08, "steal": 0.33, "idle": 94.47}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "23:45:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 3.95, "nice": 0.00, "system": 0.97, "iowait": 0.04, "steal": 0.25, "idle": 94.79}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "23:55:01", "utc": 1, "interval": 600},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 3.89, "nice": 0.00, "system": 0.93, "iowait": 0.10, "steal": 0.10, "idle": 94.97}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-27", "time": "23:59:01", "utc": 1, "interval": 240},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 3.80, "nice": 0.00, "system": 0.92, "iowait": 0.04, "steal": 0.04, "idle": 95.20}
+                                        ]
+                                },
+                                {
+                                        "timestamp": {"date": "2020-08-28", "time": "00:00:01", "utc": 1, "interval": 60},
+                                        "cpu-load": [
+                                                {"cpu": "all", "user": 3.86, "nice": 0.19, "system": 1.21, "iowait": 0.14, "steal": 0.12, "idle": 94.48}
+                                        ]
+                                }
+                        ],
+                        "restarts": [
+                        ]
+                }
+        ]
+}}

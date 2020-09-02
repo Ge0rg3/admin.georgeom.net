@@ -6,7 +6,7 @@ import subprocess as sp
 import re
 
 # Setup module
-ls_module = Blueprint('ls_module', __name__)
+ls_module = Blueprint("ls_module", __name__)
 
 
 # Parser for "ls -lA --full-time" commands

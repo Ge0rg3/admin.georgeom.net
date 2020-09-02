@@ -1,7 +1,8 @@
-import os
+from os import path, urandom
 from binascii import hexlify
 from flask import Flask, request, send_from_directory
 from flask_cors import CORS
+from variables import HOME_FILEPATH
 
 # Route imports
 from routes.ls import ls_module
@@ -9,26 +10,28 @@ from routes.services import services_module
 from routes.login import login_module
 from routes.top import top_module
 from routes.sar import sar_module
+from routes.ufw import ufw_module
 
 # Setup flask app
 APP_ROOT = "/api"
 app = Flask(__name__, template_folder="views", static_folder="views/static")
 app.config["APPLICATION_ROOT"] = APP_ROOT
 CORS(app)
-SCRIPT_FILEPATH = os.path.dirname(os.path.realpath(__file__))
+
+# Check if dev
 
 # Check password exists, and create if not
 try:
-    f = open(SCRIPT_FILEPATH + "/auth/password.txt", "r")
+    f = open(HOME_FILEPATH + "auth/password.txt", "r")
     f.close()
 except FileNotFoundError:
     password = input("Enter password: ")
-    with open(SCRIPT_FILEPATH + "/auth/password.txt", "w") as f:
+    with open(HOME_FILEPATH + "auth/password.txt", "w") as f:
         f.write(password)
 # Generate auth token
 size = 100
-auth_token = hexlify(os.urandom(size)).decode()
-with open(SCRIPT_FILEPATH + "/auth/token.txt", "w") as f:
+auth_token = hexlify(urandom(size)).decode()
+with open(HOME_FILEPATH + "auth/token.txt", "w") as f:
     f.write(auth_token)
 
 # Add routes
@@ -37,6 +40,7 @@ app.register_blueprint(services_module, url_prefix=APP_ROOT)
 app.register_blueprint(login_module, url_prefix=APP_ROOT)
 app.register_blueprint(top_module, url_prefix=APP_ROOT)
 app.register_blueprint(sar_module, url_prefix=APP_ROOT)
+app.register_blueprint(ufw_module, url_prefix=APP_ROOT)
 
 
 # Serve frontend & check auth on backend

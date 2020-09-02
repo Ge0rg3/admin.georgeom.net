@@ -1,9 +1,8 @@
-import os
 from flask import Blueprint, request
+from variables import HOME_FILEPATH
 
 # Setup module
 login_module = Blueprint('login_module', __name__)
-HOME_FILEPATH = os.path.dirname(os.path.realpath(__file__)) + "/../"
 
 
 @login_module.route("/login", methods=["POST"])

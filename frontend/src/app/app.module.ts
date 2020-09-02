@@ -21,6 +21,8 @@ import { ProcessesComponent } from './pages/processes/processes.component';
 import { CpuUsageChartComponent } from './common/components/cpu-usage-chart/cpu-usage-chart.component';
 // Custom directives
 import { ProtectedDirective } from './common/directives/protected.directive';
+import { FirewallComponent } from './pages/firewall/firewall.component';
+import { FirewallRowsComponent } from './common/components/firewall-rows/firewall-rows.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import { ProtectedDirective } from './common/directives/protected.directive';
     ProtectedDirective,
     ProcessChartComponent,
     ProcessesComponent,
-    CpuUsageChartComponent
+    CpuUsageChartComponent,
+    FirewallComponent,
+    FirewallRowsComponent
   ],
   imports: [
     BrowserModule,
