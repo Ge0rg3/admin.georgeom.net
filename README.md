@@ -10,8 +10,21 @@ git wasn't used during the bulk development of the project, this is just for cha
 4) Run deploy.sh script to compile angular
 5) Run start.sh script to start the uwsgi server
 
+## Securing
+This should be run by a service account with passwordless sudo access, and the account should be disabled so no authentication is possible.
+The following commands will create such an account:
+```
+sudo useradd -M dashboard
+sudo usermod -L dashboard
+```
+The following will then need to be added to the sudoers file:
+```
+```
+dashboard ALL=(ALL) NOPASSWD:ALL
+```
+
 ## Restart on system boot
-Add the following to user crontab
+Add the following to dashboard user crontab (where `/var/www/admin` is the project path).
 ```
 @reboot bash /var/www/admin/start.sh
 ```
@@ -32,28 +45,6 @@ server {
                 proxy_pass http://127.0.0.1:1337/;
         }
 }
-```
-
-## Permissions
-This service needs a bunch of permissions, but we don't want RCE if someone logs in. As such, the following entries have been added to the sudoers file:
-```
-## Note: These permissions grant a user a high passwordless level of access to the machine, so ensure user permissions are setup appropriately.
-# service permissions
-george ALL=NOPASSWD: /usr/sbin/service *
-# nginx service permissions
-george ALL=NOPASSWD: /usr/sbin/nginx -s reload
-# nginx sites permissions
-george ALL=NOPASSWD: /usr/bin/rm /etc/nginx/sites-enabled/georgeom.net.conf, /usr/bin/ln -s /etc/nginx/sites-available/georgeom.net.conf /etc/nginx/sites-enabled/georgeom.net.conf
-george ALL=NOPASSWD: /usr/bin/rm /etc/nginx/sites-enabled/nextcloud.conf, /usr/bin/ln -s /etc/nginx/sites-available/nextcloud.conf /etc/nginx/sites-enabled/nextcloud.conf
-george ALL=NOPASSWD: /usr/bin/rm /etc/nginx/sites-enabled/stegonline.conf, /usr/bin/ln -s /etc/nginx/sites-available/stegonline.conf /etc/nginx/sites-enabled/stegonline.conf
-george ALL=NOPASSWD: /usr/bin/rm /etc/nginx/sites-enabled/kf2.conf, /usr/bin/ln -s /etc/nginx/sites-available/kf2.conf /etc/nginx/sites-enabled/kf2.conf
-# linuxgsm permissions
-george ALL=NOPASSWD: /usr/bin/su - kf2server - /home/kf2server/kf2server stop
-george ALL=NOPASSWD: /usr/bin/su - kf2server - /home/kf2server/kf2server start
-george ALL=NOPASSWD: /usr/bin/su - kf2server - /home/kf2server/kf2server restart
-george ALL=NOPASSWD: /usr/bin/su - mcserver - /home/mcserver/mcserver stop
-george ALL=NOPASSWD: /usr/bin/su - mcserver - /home/mcserver/mcserver start
-george ALL=NOPASSWD: /usr/bin/su - mcserver - /home/mcserver/mcserver restart
 ```
 
 ## Usage
