@@ -50,3 +50,18 @@ def getRules():
         "enabled": active,
         "results": rules
     }
+
+
+@ufw_module.route("/ufw/add", methods=["POST"])
+def addRule():
+    # Get request JSON
+    req = request.json
+    for param in ["action", "to", "from"]:
+        if param not in req:
+            return {
+                "status": 400,
+                "error": f"Missing parameter {param}."
+            }, 400
+    # Execute command
+    command = ["sudo", "ufw", param["action"]]
+    return command
