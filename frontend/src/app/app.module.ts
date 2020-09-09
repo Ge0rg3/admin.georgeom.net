@@ -19,10 +19,9 @@ import { LoginComponent } from './pages/login/login.component';
 import { ProcessChartComponent } from './common/components/process-chart/process-chart.component';
 import { ProcessesComponent } from './pages/processes/processes.component';
 import { CpuUsageChartComponent } from './common/components/cpu-usage-chart/cpu-usage-chart.component';
+import { FirewallComponent } from './pages/firewall/firewall.component';
 // Custom directives
 import { ProtectedDirective } from './common/directives/protected.directive';
-import { FirewallComponent } from './pages/firewall/firewall.component';
-import { FirewallRowsComponent } from './common/components/firewall-rows/firewall-rows.component';
 
 @NgModule({
   declarations: [
@@ -38,8 +37,7 @@ import { FirewallRowsComponent } from './common/components/firewall-rows/firewal
     ProcessChartComponent,
     ProcessesComponent,
     CpuUsageChartComponent,
-    FirewallComponent,
-    FirewallRowsComponent
+    FirewallComponent
   ],
   imports: [
     BrowserModule,

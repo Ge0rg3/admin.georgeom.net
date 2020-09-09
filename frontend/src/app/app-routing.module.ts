@@ -5,6 +5,7 @@ import { DiskspaceComponent } from './pages/diskspace/diskspace.component';
 import { ServicesComponent } from './pages/services/services.component';
 import { LoginComponent } from './pages/login/login.component';
 import { ProcessesComponent } from './pages/processes/processes.component';
+import { FirewallComponent } from './pages/firewall/firewall.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -12,7 +13,8 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'diskspace', component: DiskspaceComponent},
   {path: 'services', component: ServicesComponent},
-  {path: 'processes', component: ProcessesComponent}
+  {path: 'processes', component: ProcessesComponent},
+  {path: 'firewall', component: FirewallComponent}
 ];
 
 @NgModule({

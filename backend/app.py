@@ -1,4 +1,4 @@
-from os import path, urandom
+from os import urandom
 from binascii import hexlify
 from flask import Flask, request, send_from_directory
 from flask_cors import CORS

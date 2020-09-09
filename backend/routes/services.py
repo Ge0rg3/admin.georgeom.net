@@ -45,6 +45,13 @@ def check_website(url):
     return response.status_code == 200
 
 
+# Check that the firewall is enabled
+def check_firewall():
+    output = sp.check_output(["sudo", "ufw", "status"]).decode()
+    status_line = output.split("\n")[0]
+    return "inactive" not in status_line
+
+
 RM = "/usr/bin/rm"
 LN = "/usr/bin/ln"
 SU = "/usr/bin/su"
@@ -65,6 +72,18 @@ COMMON_SERVICES = [
                       f"georgeom.net.conf {SITES_ENABLED}georgeom.net.conf",
                       RESTART_NGINX],
             "restart": []
+        }
+    },
+    {
+        "id": "firewall",
+        "name": "Firewall",
+        "description": "Server UFW (Ubuntu Firewall), configurable " +
+                       "in the Firewall page.",
+        "status_mapping": [check_firewall, []],
+        "commands": {
+            "stop": ["sudo ufw disable"],
+            "start": ["sudo ufw enable"],
+            "restart": ["sudo ufw reload"]
         }
     },
     {

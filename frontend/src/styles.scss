@@ -24,6 +24,19 @@ $min-lg: 1200px;
     }
 }
 
+// Elements for tablet and below (sm and xs) only
+.sm-xs-only {
+    @media(min-width: $min-md) {
+        display: none !important;
+    }
+}
+// Elements for non-mobile (>sm) only
+.non-sm-xs-only {
+    @media(max-width: $max-sm) {
+        display: none !important;
+    }
+}
+
 // Stores the pages themselves (gives space for sidebar)
 #page-holder {
     @media (max-width: $max-sm) {
@@ -153,4 +166,17 @@ body {
 // Allow regular text color in modals
 .modal {
     color: #334;
+}
+
+// Make a block element inline
+.d-inline {
+    display: inline-block;
+}
+
+// Pixel styling
+.mt-5-px {
+    margin-top: 5px;
+}
+.mt-10-px {
+    margin-top: 10px;
 }

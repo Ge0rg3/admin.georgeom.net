@@ -1,0 +1,234 @@
+<div protected class="container-fluid">
+  <!-- Header -->
+  <div class="bubble">
+      <div class="row">
+          <div class="col-md-12">
+              <h2>Firewall</h2>
+          </div>
+      </div>
+  </div>
+
+  <!-- Status -->
+  <div class="bubble">
+    <div id="on-off-row" class="row text-center">
+      <div class="col-lg-1 col-lg-offset-4 col-md-1 col-md-offset-4 col-sm-4 col-xs-4">
+        <h3>OFF</h3>
+      </div>
+      <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4">
+        <label class="switch push-down">
+          <input [(ngModel)]="firewall.enabled" (change)="firewallSliderChange()" type="checkbox">
+          <span class="slider round"></span>
+        </label>
+      </div>
+      <div class="col-lg-1 col-md-1 col-sm-4 col-xs-4">
+        <h3>ON</h3>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firewall Rules -->
+  <div class="bubble text-center" *ngIf="api_statuses.get.loading">
+    <!-- Loading bar -->
+    <img src="/assets/loading.gif" width="50">
+  </div>
+
+  <div class="bubble text-center" *ngIf="api_statuses.get.complete && !firewall.enabled">
+    <!-- Inactive message -->
+    <div class="text-muted mt-10-px">
+      <p>Please enable the firewall to view and edit rules.</p>
+    </div>
+  </div>
+
+  <div *ngIf="api_statuses.get.complete && firewall.enabled" class="bubble">
+    <!-- Rules -->
+    <div class="row text-center">
+      <div class="col-md-12">
+        <h3>Current Rules</h3>
+      </div>
+    </div>
+    <hr>
+
+    <!-- Non-mobile -->
+    <div class="non-sm-xs-only">
+      <!-- Header -->
+      <div id="firewall-header" class="row text-center">
+        <div class="col-lg-1 col-md-1">
+          ID
+        </div>
+        <div class="col-lg-2 col-md-2">
+          Direction
+        </div>
+        <div class="col-lg-2 col-md-2">
+          From
+        </div>
+        <div class="col-lg-2 col-md-2">
+          To
+        </div>
+        <div class="col-lg-3 col-md-3">
+          Comment
+        </div>
+        <div class="col-lg-2 col-md-2">
+          Delete
+        </div>
+      </div>
+
+      <!-- Rows -->
+      <div class="firewall-rule row text-center" *ngFor="let rule of firewall.rules">
+        <div class="col-lg-1 col-md-1">
+          {{ rule.id }}
+        </div>
+        <div class="col-lg-2 col-md-2">
+          {{ rule.policy }}
+        </div>
+        <div class="col-lg-2 col-md-2">
+          {{ rule.from }}
+        </div>
+        <div class="col-lg-2 col-md-2">
+          {{ rule.to }}
+        </div>
+        <div class="col-lg-3 col-md-3">
+          {{ rule.comment }}
+        </div>
+        <div class="col-lg-2 col-md-2">
+          <button type="button" class="btn btn-danger" (click)="deleteRulePopup(rule)">Delete</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tablet/mobile -->
+    <div class="sm-xs-only text-center">
+      <div *ngFor="let rule of firewall.rules">
+        <strong>ID: </strong>{{ rule.id }}
+        <span *ngIf="rule.comment != ''">({{ rule.comment }})</span>
+        <br>
+        <strong>Policy: </strong>{{ rule.policy }}
+        <br>
+        <strong>From: </strong>{{ rule.from }}
+        <br>
+        <strong>To: </strong>{{ rule.to }}
+        <br>
+        <button type="button" class="mt-5-px btn btn-danger" (click)="deleteRulePopup(rule)">Delete</button>
+        <hr>
+      </div>
+    </div>
+
+    <!-- Add button -->
+    <div class="row text-center">
+      <button (click)="addRulePopup()" id="newRuleButton" type="button" class="btn btn-info">Add Simple Rule</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- Delete Modal Button -->
+<button #deleteModalTrigger class="d-none" data-toggle="modal" data-target="#deleteModal">
+  <!-- Does not appear on page -->
+</button>
+
+<!-- Delete Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-body text-center">
+
+            <!-- Confirmation prompt -->
+            <div>
+              <h5>Are you sure you want to delete rule #{{ selected_rule.id }}<span *ngIf="selected_rule.comment != ''"> ({{ selected_rule.comment }})</span>?</h5>
+            </div>
+            <div>
+              <code>{{selected_rule.policy}} FROM {{ selected_rule.from }} TO {{ selected_rule.to }}</code>
+            </div>
+            <div *ngIf="!api_statuses.delete.loading" id="modal-confirm" class="mt-10-px">
+              <button (click)="deleteRule(selected_rule)" type="button" class="btn btn-success">Yes</button>
+            </div>
+
+            <!-- Loading box -->
+            <div *ngIf="api_statuses.delete.loading">
+              <img src="/assets/loading.gif" width="50">
+            </div>
+
+            <!-- Error message -->
+            <div class="mt-10-px" *ngIf="api_statuses.delete.error !== ''">
+              <span class="fail">An error occurred: {{ api_statuses.delete.error }}</span>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+              <button #deleteModalClose type="button" class="btn btn-primary" data-toggle="modal" data-target="#deleteModal">Close</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- Add Modal Button -->
+<button #addModalTrigger class="d-none" data-toggle="modal" data-target="#addModal">
+  <!-- Does not appear on page -->
+</button>
+<!-- Add Modal -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-body text-center">
+
+            <!-- Header -->
+            <div class="row">
+              <div class="col-md-12">
+                <h4>Add Simple Rule</h4>
+              </div>
+            </div>
+
+            <!-- Type input -->
+            <div class="row add-input mt-5-px">
+              <div class="col-lg-2 col-lg-offset-2 col-md-2 col-md-offset-2">
+                <label for="typeInput">Type:</label>
+              </div>
+              <div class="col-lg-6 col-md-6">
+                <select [(ngModel)]="addRuleInput.type" class="form-control" id="typeInput">
+                  <option value="allow">Allow</option>
+                  <option value="deny">Deny</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Port input -->
+            <div class="row add-input">
+              <div class="col-lg-2 col-lg-offset-2 col-md-2 col-md-offset-2">
+                <label for="portInput">Port:</label>
+              </div>
+              <div class="col-lg-6 col-md-6">
+                <input [(ngModel)]="addRuleInput.port" type="number" min="1" class="form-control" id="portInput" placeholder="443">
+              </div>
+            </div>
+
+            <!-- Comment input -->
+            <div class="row add-input">
+              <div class="col-lg-2 col-lg-offset-2 col-md-2 col-md-offset-2">
+                <label for="commentInput">Comment:</label>
+              </div>
+              <div class="col-lg-6 col-md-6">
+                <input [(ngModel)]="addRuleInput.comment" type="text" class="form-control" id="commentInput" placeholder="https">
+              </div>
+            </div>
+
+            <!-- Add button -->
+            <div *ngIf="!api_statuses.add.loading" class="row add-input">
+              <button (click)="addSimpleRule()" [disabled]="addRuleInput.port === null" type="button" class="btn btn-success">Add</button>
+            </div>
+
+            <!-- Loading -->
+            <div *ngIf="api_statuses.add.loading" class="row add-input">
+              <img src="/assets/loading.gif" width="50">
+            </div>
+
+            <!-- Error -->
+            <div *ngIf="api_statuses.add.complete && api_statuses.add.error != ''" class="row add-input">
+              <span class="fail">An error occurred: {{ api_statuses.add.error }}</span>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+              <button #addModalClose type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">Close</button>
+          </div>
+      </div>
+  </div>
+</div>

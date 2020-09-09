@@ -1,0 +1,27 @@
+Status: active
+
+     To                         Action      From
+     --                         ------      ----
+[ 1] 22/tcp                     ALLOW IN    Anywhere
+[ 2] 80/tcp                     ALLOW IN    Anywhere
+[ 3] 443/tcp                    ALLOW IN    Anywhere
+[ 4] 7777                       ALLOW IN    Anywhere                   # kf2 game
+[ 5] 27015                      ALLOW IN    Anywhere                   # steamcmd
+[ 6] 6666                       ALLOW IN    Anywhere                   # kf2 webadmin
+[ 7] 20560                      ALLOW IN    Anywhere                   # steamcmd
+[ 8] 123                        ALLOW IN    Anywhere                   # ntp
+[ 9] 25565                      ALLOW IN    Anywhere                   # minecraft
+[10] 4200                       ALLOW IN    Anywhere                   # angular dev
+[11] 5000                       ALLOW IN    Anywhere                   # flask dev
+[12] Anywhere on eth0           DENY IN     15.15.15.51                # complex
+[13] 22/tcp (v6)                ALLOW IN    Anywhere (v6)
+[14] 80/tcp (v6)                ALLOW IN    Anywhere (v6)
+[15] 443/tcp (v6)               ALLOW IN    Anywhere (v6)
+[16] 7777 (v6)                  ALLOW IN    Anywhere (v6)              # kf2 game
+[17] 27015 (v6)                 ALLOW IN    Anywhere (v6)              # steamcmd
+[18] 6666 (v6)                  ALLOW IN    Anywhere (v6)              # kf2 webadmin
+[19] 20560 (v6)                 ALLOW IN    Anywhere (v6)              # steamcmd
+[20] 123 (v6)                   ALLOW IN    Anywhere (v6)              # ntp
+[21] 25565 (v6)                 ALLOW IN    Anywhere (v6)              # minecraft
+[22] 4200 (v6)                  ALLOW IN    Anywhere (v6)              # angular dev
+[23] 5000 (v6)                  ALLOW IN    Anywhere (v6)              # flask dev
