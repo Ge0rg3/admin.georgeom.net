@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
   public servicesLoading: boolean = false;
 
   public diskspaceFiles: any[];
-  public diskspacePath: string = "/home/";
+  public diskspacePath: string = "/";
 
   constructor(
     private utils: UtilsService,
