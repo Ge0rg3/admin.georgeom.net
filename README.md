@@ -25,9 +25,10 @@ dashboard ALL=(ALL) NOPASSWD:ALL
 ```
 
 ## Restart on system boot
-Add the following to dashboard user crontab (where `/var/www/admin` is the project path).
+Add the following to dashboard user crontab (where `/var/www/admin` is the project path). We run `du` as it takes a long time to get diskspace the first time, which is then cached.
 ```
 @reboot bash /var/www/admin/start.sh
+@reboot bash du -ax  / -d 1 -b
 ```
 
 ## Serving on nginx
