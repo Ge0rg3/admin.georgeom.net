@@ -56,3 +56,5 @@ server {
 ![Processes](/frontend/src/assets/processes.png "Processes")
 #### Statuses
 ![Statuses](/frontend/src/assets/status.png "Statuses")
+#### Firewall
+![Firewall](/frontend/src/assets/firewall.png "Firewall")
