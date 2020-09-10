@@ -21,7 +21,6 @@ sudo usermod -aG sudo dashboard
 ```
 The following will then need to be added to the sudoers file:
 ```
-```
 dashboard ALL=(ALL) NOPASSWD:ALL
 ```
 
