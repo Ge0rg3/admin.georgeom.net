@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UtilsService } from 'src/app/common/services/utils.service';
+import { LsService } from '../../common/services/ls.service';
 
 @Component({
   selector: 'app-diskspace',
@@ -11,20 +12,36 @@ export class DiskspaceComponent implements OnInit {
   public currentPath: string = "/";
   public currentHover: any;
   public files: any[] = [];
+  public loading: boolean = false;
 
-  constructor(public utils: UtilsService) { }
+  constructor(
+    public utils: UtilsService,
+    private lsApi: LsService
+  ) { }
 
   ngOnInit(): void {
+    this.updateFiles("/");
   }
 
   // Update path if graph is clicked on
   public updatePath(newPath: string) {
-    this.currentPath = newPath;
+    this.updateFiles(newPath).then((success) => {
+      if (success) {
+        this.currentPath = newPath;
+      }
+    });
   }
 
-  // Get file list from child component
-  public setFiles(files: any[]) {
-    this.files = files;
+  // Get file list API
+  public updateFiles(path: string): Promise<boolean> {
+    this.loading = true;
+    return this.lsApi.getFolderSizes(path).then((response) => {
+      this.loading = false;
+      if (response.status === 200) {
+        this.files = response.results;
+      }
+      return response.status === 200;
+    });
   }
 
   // Handle "open directory" click

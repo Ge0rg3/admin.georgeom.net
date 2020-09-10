@@ -4,7 +4,6 @@ import { ChartType, ChartOptions } from 'chart.js';
 import { Label } from 'ng2-charts';
 // Custom imports
 import { UtilsService } from '../../services/utils.service';
-import { LsService } from '../../services/ls.service';
 
 @Component({
   selector: 'diskspace-chart',
@@ -12,11 +11,10 @@ import { LsService } from '../../services/ls.service';
   styleUrls: ['diskspace-chart.component.scss']
 })
 export class DiskspaceChartComponent implements OnInit {
-  @Input() path: string = "/";
-  @Output() path_update = new EventEmitter<string>();
-  @Output() file_update = new EventEmitter<string>();
-  @Output() files = new EventEmitter<any>();
-  public filesArr: any[] = [];
+  @Output() path_update = new EventEmitter<string>(); // Change path (on folder click)
+  @Output() file_update = new EventEmitter<string>(); // Change file preview (on hover)
+  @Input() path: string = "/"; // Path input from parent
+  @Input() files: any[]; // Files from parent
   
   public pieChartOptions: ChartOptions = {
     responsive: true,
@@ -38,10 +36,7 @@ export class DiskspaceChartComponent implements OnInit {
   public pieChartLegend = true;
   public pieChartColors = [];
 
-  constructor(
-    private lsApi: LsService,
-    private utils: UtilsService
-  ) { }
+  constructor(private utils: UtilsService) { }
   
   ngOnInit() {
     let self = this;
@@ -53,46 +48,37 @@ export class DiskspaceChartComponent implements OnInit {
 
   // Listen for filepath changes
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.path) {
+    if (changes.files) {
       // Set new path
-      this.path = changes.path.currentValue;
-      this.updateFolder(this.path).then((success) => {
-        if (!success) {
-          this.path_update.emit(changes.path.previousValue);
-        }
-      });
+      this.files = changes.files.currentValue;
+      if (this.files !== undefined) {
+        this.updateFolder(this.files);
+      }
     }
   }
   
-  // Update the folder, and return success boolean
-  public async updateFolder(path: string): Promise<boolean> {
-    return this.lsApi.getFolderSizes(path).then((response) => {
-      if (response.status == 200) {
-        // Provide files to parent
-        this.filesArr = response.results;
-        this.files.emit(response.results);
-        // Put data into pie chart
-        let labels = [];
-        let data = [];
-        let colors = [];
-        for (let result of response.results) {
-          data.push(result.filesize);
-          labels.push(result.entry);
-          colors.push(this.utils.randomRgb(result.entry));
-        }
-        this.pieChartColors = [{backgroundColor: colors}]
-        if (labels.length > 25 || window.innerWidth < 576) {
-          // Don't show labels if there are too many, or if on mobile
-          this.pieChartLegend = false;
-        }
-        else {
-          this.pieChartLegend = true;
-        }
-        this.pieChartLabels = labels;
-        this.pieChartData = data;
-      }
-      return response.status == 200;
-    });
+  // Update the folder items
+  public updateFolder(filesArr: any[]) {
+    // Put data into pie chart
+    let labels = [];
+    let data = [];
+    let colors = [];
+    for (let result of filesArr) {
+      data.push(result.filesize);
+      labels.push(result.entry);
+      colors.push(this.utils.randomRgb(result.entry));
+    }
+    this.pieChartColors = [{backgroundColor: colors}]
+    if (labels.length > 25 || window.innerWidth < 576) {
+      // Don't show labels if there are too many, or if on mobile
+      this.pieChartLegend = false;
+    }
+    else {
+      this.pieChartLegend = true;
+    }
+    this.pieChartLabels = labels;
+    this.pieChartData = data;
+
   }
 
   // Events
@@ -100,7 +86,7 @@ export class DiskspaceChartComponent implements OnInit {
     // Get new item name
     let clickPath = active[0]['_model'].label;
     // Check its a valid item
-    let valid = this.filesArr.filter(file => file.entry == clickPath);
+    let valid = this.files.filter(file => file.entry == clickPath);
     if (valid.length == 0) {
       return;
     }
@@ -109,20 +95,20 @@ export class DiskspaceChartComponent implements OnInit {
     }
     // Update and emit path
     let newPath = this.path + clickPath + "/";
-    this.updateFolder(newPath).then((success) => {
-      if (success) {
-        this.path = newPath;
-        this.path_update.emit(newPath);
-      }
-    })
+    this.path_update.emit(newPath);
   }
 
   public chartHovered(event: MouseEvent, item: {}[]): void {
     let mouse = "default";
     if (item[0]) {
       let hoverPath = item[0]['_model'].label;
-      this.file_update.emit(hoverPath);
-      mouse = "pointer";
+      // Only show pointer if on folder
+      let file_object = this.files.filter((f) => f.entry === hoverPath)[0];
+      if (file_object.entry_type === "directory" || file_object.entry_type === "link") {
+        mouse = "pointer";
+      }
+      // Send hovered path
+      this.file_update.emit(file_object);
     }
     event["target"]["style"]["cursor"] = mouse;
   }

@@ -14,4 +14,8 @@ export class TopService {
       return this.api.get("/top");
   }
 
+  public async killProcess(id) {
+    return this.api.get(`/top/kill/${id}`)
+  }
+
 }

@@ -17,7 +17,7 @@
       <hr>
       <!-- Chart -->
       <div style="padding-left: 5%;">
-        <diskspace-chart [path]="'/usr/'"></diskspace-chart>
+        <diskspace-chart [files]="diskspaceFiles" [path]="diskspacePath" (path_update)="getDiskspace($event)"></diskspace-chart>
       </div>
     </div>
 
@@ -35,7 +35,10 @@
         </div>
         <hr>
         <!-- Chart -->
-        <service-rows [services]="services" [minimal]="true"></service-rows>
+        <service-rows *ngIf="!servicesLoading" [services]="services" [minimal]="true"></service-rows>
+        <div *ngIf="servicesLoading" class="text-center">
+          <img src="/assets/loading.gif" width="50">
+        </div>
       </div>
     </div>
 

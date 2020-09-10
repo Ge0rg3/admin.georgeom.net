@@ -50,7 +50,10 @@
                     <hr>
                 </div>
                 <!-- Processes -->
-                <div id="process-headers" class="row text-center real-mb-5 font-weight-bold" style="padding-left: 7%;">
+                <div *ngIf="api_statuses.get.loading" class="text-center">
+                    <img src="/assets/loading.gif" width="50">
+                </div>
+                <div *ngIf="!api_statuses.get.loading" id="process-headers" class="row text-center real-mb-5 font-weight-bold" style="padding-left: 7%;">
                     <div class="col-lg-1 col-md-1 col-sm-1">
                         Status
                     </div>
@@ -133,6 +136,7 @@
                     <p>Time: <code>{{ selectedProcess.time }}</code></p>
                     <p>Priority: {{ selectedProcess.priority }}</p>
                     <p>Nice Value: {{ selectedProcess.nice_value }}</p>
+                    <button (click)="openKillModal()" type="button" class="btn btn-danger">Kill</button>
                 </div>
             </div>
         </div>
@@ -140,3 +144,30 @@
     
 
 </div>
+
+<!-- Kill Confirm Modal -->
+<button #killModalTrigger class="d-none" data-toggle="modal" data-target="#killModal">
+    <!-- Does not appear on page -->
+  </button>
+  <!-- Add Modal -->
+  <div class="modal fade" id="killModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body text-center" *ngIf="selectedProcess">
+                <p>Are you sure that you want to kill process {{ selectedProcess.pid }} (<code>{{ selectedProcess.command }}</code>)?</p>
+                <div *ngIf="!api_statuses.kill.loading && !api_statuses.kill.complete">
+                    <button (click)="killProcess(selectedProcess.pid)" type="button" class="btn btn-success">Yes</button>
+                </div>
+                <div *ngIf="api_statuses.kill.loading" class="text-center">
+                    <img src="/assets/loading.gif" width="50">
+                </div>
+                <div class="mt-10-px" *ngIf="api_statuses.kill.error !== ''">
+                    <span class="fail">An error occurred: {{ api_statuses.kill.error }}</span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button #killModalClose type="button" class="btn btn-primary" data-toggle="modal" data-target="#killModal">Close</button>
+            </div>
+        </div>
+    </div>
+  </div>

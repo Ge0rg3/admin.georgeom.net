@@ -68,3 +68,17 @@ def getTop():
         "status": 200,
         "results": parse_top()
     }, 200
+
+
+@top_module.route("/top/kill/<id>", methods=["GET"])
+def killProcess(id):
+    try:
+        sp.check_output(["sudo", "kill", "-9", id])
+        return {
+            "status": 200
+        }, 200
+    except sp.SubprocessError:
+        return {
+            "status": 500,
+            "error": "Could not kill process."
+        }, 500
