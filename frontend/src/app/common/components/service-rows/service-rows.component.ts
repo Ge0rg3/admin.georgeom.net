@@ -9,7 +9,8 @@ import { ServicesService } from '../../services/services.service';
 export class ServiceRows {
   @Input() services: any[];
   @Input() minimal: boolean = true;
-  @Output() serviceChanged = new EventEmitter<any>();
+  @Output() serviceChangeRequest = new EventEmitter<any>();
+  @Output() serviceChangeResponse = new EventEmitter<any>();
   public modalDetails: any = {};
 
   constructor(private servicesApi: ServicesService) { }
@@ -21,18 +22,26 @@ export class ServiceRows {
     }
   }
   public changeService(changeType, service): void {
-    // Exit of not restartable service
-    if (!service.can_restart && changeType == "restart")
-      return;
+    // Exit if forbidden by API
+    if ((changeType === "start" && !service.startable) ||
+      (changeType === "stop" && !service.stoppable) ||
+      (changeType === "restart" && !service.restartable)
+    ) return;
     // Get correct API call for change
     let serviceType = service.type == "common" ? "Common" : "System";
     let apiCall = changeType + serviceType + "Service";
     // Trigger call
+    this.serviceChangeRequest.emit({
+      "action": changeType,
+      "service": service.name,
+      "loading": true
+    })
     this.servicesApi[apiCall](service.id).then((response) => {
-      this.serviceChanged.emit({
+      this.serviceChangeResponse.emit({
         "response_code": response.status,
         "action": changeType,
-        "service": service.name
+        "service": service.name,
+        "loading": false
       });
     })
   }

@@ -13,7 +13,12 @@
             <h4>Common Services</h4>
         </div>
         <hr>
-        <service-rows [services]="commonServices" [minimal]="false" (serviceChanged)="catchServiceChange($event)"></service-rows>
+        <div *ngIf="commonServices !== undefined">
+            <service-rows [services]="commonServices" [minimal]="false" (serviceChangeRequest)="catchServiceChangeRequest($event)" (serviceChangeResponse)="catchServiceChangeResponse($event)"></service-rows>
+        </div>
+        <div *ngIf="commonServices === undefined" class="text-center">
+            <img src="/assets/loading.gif" width="50">
+        </div>
     </div>
     
     <!-- System bubble -->
@@ -22,7 +27,12 @@
             <h4>System Services</h4>
         </div>
         <hr>
-        <service-rows [services]="systemServices" [minimal]="false" (serviceChanged)="catchServiceChange($event)"></service-rows>
+        <div *ngIf="systemServices !== undefined">
+            <service-rows [services]="systemServices" [minimal]="false" (serviceChangeRequest)="catchServiceChangeRequest($event)" (serviceChangeResponse)="catchServiceChangeResponse($event)"></service-rows>
+        </div>
+        <div *ngIf="systemServices === undefined" class="text-center">
+            <img src="/assets/loading.gif" width="50">
+        </div>
     </div>
 </div>
 
@@ -37,7 +47,12 @@
         <div class="modal-content">
             <div class="modal-body text-center">
                 <h5>Triggered {{ modalDetails.action }} action to {{ modalDetails.service }} service.</h5>
-                <p [class.success]="modalDetails.response_code === 200" [class.fail]="modalDetails.response_code !== 200">Response Status: {{ modalDetails.response_code }}</p>
+                <div *ngIf="modalDetails.loading">
+                    <img src="/assets/loading.gif" width="50">
+                </div>
+                <div *ngIf="!modalDetails.loading">
+                    <p [class.success]="modalDetails.response_code === 200" [class.fail]="modalDetails.response_code !== 200">Response Status: {{ modalDetails.response_code }}</p>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal">Close</button>
