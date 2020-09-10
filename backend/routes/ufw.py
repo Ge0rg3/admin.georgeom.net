@@ -17,7 +17,7 @@ UFW_PARSER_REGEX = re.compile(r"""
     ([^\s]+(?:\s\(v6\))?(?:\son\s[^\s]+)?)\s+   # To column
     (\w+\s\w+)\s+                               # Policy column
     ([^\s]+(?:\s\(v6\))?(?:\son\s[^\s]+)?)      # From column
-    (?:\s+\#\s(.+))?                            # Comment column
+    (?:\s+\#\s(.+))?(?:\s+)?                    # Comment column
     $                                           # End of line
 """, re.MULTILINE | re.VERBOSE)
 
