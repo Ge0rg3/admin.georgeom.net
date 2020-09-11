@@ -1,5 +1,6 @@
 from flask import Blueprint, request
 from variables import HOME_FILEPATH
+import subprocess as sp
 
 # Setup module
 login_module = Blueprint('login_module', __name__)
@@ -28,6 +29,14 @@ def login():
     # Get auth token from file
     with open(HOME_FILEPATH + "auth/token.txt", "r") as f:
         token = f.read()
+    # Send login notification on telegram
+    try:
+        message = f"admin.georgeom.net login from '*{request.remote_addr}*'."
+        sp.check_output(["telegram-send", "--format", "markdown", message])
+    except sp.SubprocessError:
+        print("Could not send telegram message. " +
+              "Please ensure telegram-send is correctly configured."
+              )
     return {
         "status": 200,
         "token": token

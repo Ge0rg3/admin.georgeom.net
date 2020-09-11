@@ -146,8 +146,7 @@ COMMON_SERVICES = [
         "id": "stegonline",
         "name": "StegOnline",
         "description": "StegOnline static site hosted at " +
-                "https://stegonline.georgeom.net. " +
-                "Restart triggers nginx service restart.",
+                "https://stegonline.georgeom.net.",
         "status_mapping": [check_website, ["https://stegonline.georgeom.net"]],
         "commands": {
             "stop": [f"sudo {RM} " +
