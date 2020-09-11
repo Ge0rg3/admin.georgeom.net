@@ -31,7 +31,13 @@ def login():
         token = f.read()
     # Send login notification on telegram
     try:
-        message = f"admin.georgeom.net login from '*{request.remote_addr}*'."
+        # In prod, we have Cf-Connecting-Ip connections from 127.0.0.1
+        user_ip = request.headers.get("Cf-Connecting-Ip", "")
+        if user_ip == "" or request.remote_addr == "127.0.0.1":
+            # Otherwise use direct IP
+            user_ip = request.remote_addr
+        # Send message
+        message = f"admin.georgeom.net login from '*{user_ip}*'."
         sp.check_output(["telegram-send", "--format", "markdown", message])
     except sp.SubprocessError:
         print("Could not send telegram message. " +
