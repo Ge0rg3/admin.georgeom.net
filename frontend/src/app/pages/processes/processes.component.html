@@ -48,6 +48,7 @@
                         <h3>All Processes</h3>
                     </div>
                     <hr>
+                    <p class="xs-only">&nbsp;</p>
                 </div>
                 <!-- Processes -->
                 <div *ngIf="api_statuses.get.loading" class="text-center">
@@ -104,10 +105,12 @@
                         <p><span class="xs-only font-weight-bold">User: </span>{{ process.user }}</p>
                     </div>
                     <!-- xs padding -->
-                    <ng-container *ngIf="i != processes.length - 1">
-                        <div class="xs-only col-xs-12" style="height: 1vh"></div>
-                        <hr class="xs-only">
-                    </ng-container>
+                    <div class="xs-only">
+                        <!-- Mobile has strange bug where hr doesn't appear unless below text -->
+                        <p>&nbsp;</p>
+                        <hr>
+                        <p>&nbsp;</p>
+                    </div>
                 </div>
             </div>
         </div>
