@@ -33,7 +33,7 @@ def login():
     try:
         # In prod, we have Cf-Connecting-Ip connections from 127.0.0.1
         user_ip = request.headers.get("Cf-Connecting-Ip", "")
-        if user_ip == "" or request.remote_addr == "127.0.0.1":
+        if user_ip == "" or request.remote_addr != "127.0.0.1":
             # Otherwise use direct IP
             user_ip = request.remote_addr
         # Send message
