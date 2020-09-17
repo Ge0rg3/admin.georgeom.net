@@ -167,6 +167,17 @@ COMMON_SERVICES = [
             "start": ["sudo /usr/sbin/service ssh start"],
             "restart": ["sudo /usr/sbin/service ssh restart"]
         }
+    },
+    {
+        "id": "mobsf",
+        "name": "MobSF",
+        "description": "Mobile Security Framework (MobSF).",
+        "status_mapping": [check_website, ["https://mobsf.georgeom.net"]],
+        "commands": {
+            "stop": ['pkill -SIGINT -f "/var/www/mobsf/venv/bin/python3 /var/www/mobsf/venv/bin/gunicorn -b 127.0.0.1:4444 MobSF.wsgi:application --workers=1 --threads=10 --timeout=1"'],
+            "start": ["sudo bash /var/www/mobsf/run_mobsf.sh 127.0.0.1:4444"],
+            "restart": []
+        }
     }
 ]
 
