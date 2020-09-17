@@ -175,7 +175,7 @@ COMMON_SERVICES = [
         "status_mapping": [check_website, ["https://mobsf.georgeom.net"]],
         "commands": {
             "stop": ['pkill -SIGINT -f "/var/www/mobsf/venv/bin/python3 /var/www/mobsf/venv/bin/gunicorn -b 127.0.0.1:4444 MobSF.wsgi:application --workers=1 --threads=10 --timeout=1"'],
-            "start": ["sudo bash /var/www/mobsf/run_mobsf.sh 127.0.0.1:4444"],
+            "start": ["sudo bash /var/www/mobsf/run.sh 127.0.0.1:4444"],
             "restart": []
         }
     }
