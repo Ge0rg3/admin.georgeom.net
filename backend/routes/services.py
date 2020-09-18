@@ -172,9 +172,9 @@ COMMON_SERVICES = [
         "id": "mobsf",
         "name": "MobSF",
         "description": "Mobile Security Framework (MobSF).",
-        "status_mapping": [check_website, ["https://mobsf.georgeom.net"]],
+        "status_mapping": [check_local_port, [4444]],
         "commands": {
-            "stop": ['pkill -SIGINT -f "/var/www/mobsf/venv/bin/python3 /var/www/mobsf/venv/bin/gunicorn -b 127.0.0.1:4444 MobSF.wsgi:application --workers=1 --threads=10 --timeout=1"'],
+            "stop": ['sudo bash /home/george/stop_mobsf.sh'],
             "start": ["sudo bash /home/george/start_mobsf.sh"],
             "restart": []
         }
