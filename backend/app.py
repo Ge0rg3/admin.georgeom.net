@@ -18,24 +18,18 @@ app = Flask(__name__, template_folder="views", static_folder="views/static")
 app.config["APPLICATION_ROOT"] = APP_ROOT
 CORS(app)
 
-# Check password exists, and create if not
-try:
-    f = open(HOME_FILEPATH + "auth/password.txt", "r")
-    f.close()
-except FileNotFoundError:
-    password = input("Enter password: ")
-    with open(HOME_FILEPATH + "auth/password.txt", "w") as f:
-        f.write(password)
-
 
 # Generate tokens
 def generate_token(size):
     return hexlify(urandom(size)).decode()
 
 
-ACCESS_TOKENS = {
-    permission["name"]: generate_token(100) for permission in PERMISSIONS
-    }
+ACCESS_TOKENS = [
+    {
+        "name": permission["name"],
+        "token": generate_token(100)
+     } for permission in PERMISSIONS
+]
 
 # Add routes
 app.register_blueprint(ls_module, url_prefix=APP_ROOT)
@@ -53,6 +47,7 @@ def before_request():
     """
     Serve frontend
     """
+
     if not request.path.startswith("/api"):
         # If in assets folder, return ilfe
         if request.path.startswith("/assets/"):
@@ -68,7 +63,20 @@ def before_request():
         return
     # Otherwise, auth token required
     token_header = request.headers.get("Token") or ""
-    if token_header != generate_token(100):
+    authorized = False
+    valid_permissions = [
+        p for p in ACCESS_TOKENS if p["token"] == token_header
+    ]
+    if len(valid_permissions) == 1:
+        permission_name = valid_permissions[0]["name"]
+        permission_object = [
+            p for p in PERMISSIONS if p["name"] == permission_name
+        ][0]
+        for path in permission_object["paths"]:
+            if request.path.startswith(path):
+                authorized = True
+
+    if not authorized:
         return {
             "status": 401,
             "error": "Invalid auth token"
