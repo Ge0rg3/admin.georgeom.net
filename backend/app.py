@@ -5,7 +5,7 @@ from flask_cors import CORS
 from variables import HOME_FILEPATH, PERMISSIONS
 
 # Route imports
-from routes.login import generate_login_module
+from routes.auth import generate_auth_module
 from routes.ls import ls_module
 from routes.services import services_module
 from routes.top import top_module
@@ -33,12 +33,15 @@ def generate_token(size):
     return hexlify(urandom(size)).decode()
 
 
-tokens = {permission: generate_token(100) for permission in PERMISSIONS}
+ACCESS_TOKENS = {
+    permission["name"]: generate_token(100) for permission in PERMISSIONS
+    }
 
 # Add routes
 app.register_blueprint(ls_module, url_prefix=APP_ROOT)
 app.register_blueprint(services_module, url_prefix=APP_ROOT)
-app.register_blueprint(generate_login_module(PERMISSIONS), url_prefix=APP_ROOT)
+app.register_blueprint(generate_auth_module(PERMISSIONS, ACCESS_TOKENS),
+                       url_prefix=APP_ROOT)
 app.register_blueprint(top_module, url_prefix=APP_ROOT)
 app.register_blueprint(sar_module, url_prefix=APP_ROOT)
 app.register_blueprint(ufw_module, url_prefix=APP_ROOT)
