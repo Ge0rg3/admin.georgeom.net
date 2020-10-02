@@ -18,16 +18,13 @@ HOME_FILEPATH = path.dirname(path.realpath(__file__)) + "/"
 
 
 """
-    Get passwords from auth.txt file
-    File should be in format:
-    ```
-    user:password
-    seconduser:password
+    Get passwords from permissions.db
+    Empty db stored in backend/dev_data/permissions.db
     ```
 """
 def getPermissions():
     # Get data from DB
-    conn = sqlite3.connect('permissions.db')
+    conn = sqlite3.connect(f"{HOME_FILEPATH}auth/permissions.db")
     cur = conn.cursor()
     cur.execute("SELECT * FROM permissions")
     rows = cur.fetchall()

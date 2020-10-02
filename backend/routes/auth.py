@@ -32,8 +32,10 @@ def generate_auth_module(permissions, auth_tokens):
         permission = [
             p for p in permissions if p["accesskey"] == accesskey_input
         ][0]
-        auth_token = auth_tokens[permission["name"]]
-        auth_paths = permission["path"]
+        auth_token = [
+            tok for tok in auth_tokens if tok["name"] == permission["name"]
+        ][0]["token"]
+        auth_paths = permission["paths"]
 
         # Send login notification on telegram
         try:
