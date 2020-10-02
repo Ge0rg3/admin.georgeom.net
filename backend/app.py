@@ -2,12 +2,12 @@ from os import urandom
 from binascii import hexlify
 from flask import Flask, request, send_from_directory
 from flask_cors import CORS
-from variables import HOME_FILEPATH
+from variables import HOME_FILEPATH, PERMISSIONS
 
 # Route imports
+from routes.login import generate_login_module
 from routes.ls import ls_module
 from routes.services import services_module
-from routes.login import login_module
 from routes.top import top_module
 from routes.sar import sar_module
 from routes.ufw import ufw_module
@@ -18,8 +18,6 @@ app = Flask(__name__, template_folder="views", static_folder="views/static")
 app.config["APPLICATION_ROOT"] = APP_ROOT
 CORS(app)
 
-# Check if dev
-
 # Check password exists, and create if not
 try:
     f = open(HOME_FILEPATH + "auth/password.txt", "r")
@@ -28,16 +26,19 @@ except FileNotFoundError:
     password = input("Enter password: ")
     with open(HOME_FILEPATH + "auth/password.txt", "w") as f:
         f.write(password)
-# Generate auth token
-size = 100
-auth_token = hexlify(urandom(size)).decode()
-with open(HOME_FILEPATH + "auth/token.txt", "w") as f:
-    f.write(auth_token)
+
+
+# Generate tokens
+def generate_token(size):
+    return hexlify(urandom(size)).decode()
+
+
+tokens = {permission: generate_token(100) for permission in PERMISSIONS}
 
 # Add routes
 app.register_blueprint(ls_module, url_prefix=APP_ROOT)
 app.register_blueprint(services_module, url_prefix=APP_ROOT)
-app.register_blueprint(login_module, url_prefix=APP_ROOT)
+app.register_blueprint(generate_login_module(PERMISSIONS), url_prefix=APP_ROOT)
 app.register_blueprint(top_module, url_prefix=APP_ROOT)
 app.register_blueprint(sar_module, url_prefix=APP_ROOT)
 app.register_blueprint(ufw_module, url_prefix=APP_ROOT)
@@ -64,7 +65,7 @@ def before_request():
         return
     # Otherwise, auth token required
     token_header = request.headers.get("Token") or ""
-    if token_header != auth_token:
+    if token_header != generate_token(100):
         return {
             "status": 401,
             "error": "Invalid auth token"
