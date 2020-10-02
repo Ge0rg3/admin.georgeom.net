@@ -9,6 +9,7 @@ git wasn't used during the bulk development of the project, this is just for cha
 3) Run setup.sh script with sudo/as root
 4) Run deploy.sh script to compile angular
 5) Run start.sh script to start the uwsgi server
+6) Move example database from backend/dev_data/permissions.db to backend/auth/ and add permissions
 
 ## Securing
 This should be run by a service account with passwordless sudo access, and the account should be disabled so no authentication is possible.
