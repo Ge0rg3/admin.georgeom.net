@@ -35,7 +35,6 @@ def generate_auth_module(permissions, auth_tokens):
         auth_token = [
             tok for tok in auth_tokens if tok["name"] == permission["name"]
         ][0]["token"]
-        auth_paths = permission["paths"]
 
         # Send login notification on telegram
         try:
@@ -57,7 +56,8 @@ def generate_auth_module(permissions, auth_tokens):
         return {
             "status": 200,
             "token": auth_token,
-            "paths": auth_paths
+            "permission": permission["name"],
+            "paths": permission["paths"]
         }
 
     return auth_module

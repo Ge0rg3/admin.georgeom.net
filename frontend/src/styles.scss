@@ -39,6 +39,10 @@ $min-lg: 1200px;
 
 // Stores the pages themselves (gives space for sidebar)
 #page-holder {
+    padding: 1%;
+}
+#sidebar_container + #page-holder {
+    padding: 0%;
     @media (max-width: $max-sm) {
         margin-left: 1%;
     }

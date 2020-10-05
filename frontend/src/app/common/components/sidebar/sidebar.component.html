@@ -1,7 +1,7 @@
 <div class="sidebar container-fluid">
     <div class="row mb-2" (click)="navigate('/home')">
         <div class="col-md-12 hover-fade">
-            <h3>georgeom.net</h3>
+            <h3>{{ permission }}</h3>
         </div>
     </div>
     <div class="sidebar-image">
@@ -12,25 +12,19 @@
             <h4><i class="material-icons">home</i>&nbsp;Home</h4>
         </div>
     </div>
+    <div class="row" (click)="logout()">
+        <div class="col-md-12 hover-fade">
+            <h4><i class="material-icons">exit_to_app</i>&nbsp;Logout</h4>
+        </div>
+    </div>
     <hr>
-    <div class="row" (click)="navigate('/diskspace')">
-        <div class="col-md-12 hover-fade">
-            <h4><i class="material-icons">storage</i>&nbsp;Diskspace</h4>
+    
+    <div *ngFor="let item of sidebarItems">
+        <div *ngIf="isPermitted(item)" class="row" (click)="navigate(item.link)">
+            <div class="col-md-12 hover-fade">
+                <h4><i class="material-icons">{{ item.icon }}</i>&nbsp;{{ item.title }}</h4>
+            </div>
         </div>
     </div>
-    <div class="row" (click)="navigate('/services')">
-        <div class="col-md-12 hover-fade">
-            <h4><i class="material-icons">thumbs_up_down</i>&nbsp;Services</h4>
-        </div>
-    </div>
-    <div class="row" (click)="navigate('/processes')">
-        <div class="col-md-12 hover-fade">
-            <h4><i class="material-icons">insights</i>&nbsp;Processes</h4>
-        </div>
-    </div>
-    <div class="row" (click)="navigate('/firewall')">
-        <div class="col-md-12 hover-fade">
-            <h4><i class="material-icons">security</i>&nbsp;Firewall</h4>
-        </div>
-    </div>
+
 </div>

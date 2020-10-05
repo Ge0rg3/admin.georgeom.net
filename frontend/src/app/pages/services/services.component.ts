@@ -32,7 +32,9 @@ export class ServicesComponent implements OnInit {
 
   // End API calls when leaving task page
   ngOnDestroy(): void {
-    this.timer.unsubscribe();
+    if (this.timer) {
+      this.timer.unsubscribe();
+    }
   }
   
   public updateServices(): void {

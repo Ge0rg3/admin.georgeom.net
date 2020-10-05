@@ -4,7 +4,7 @@
   <div class="row same-height center-row-items">
 
     <!-- Diskspace -->
-    <div class="bubble standard-bubble-height col-md-5 col-sm-12 col-xs-12">
+    <div *ngIf="display.diskspace" class="bubble standard-bubble-height col-md-5 col-sm-12 col-xs-12">
       <!-- Header -->
       <div routerLink="/diskspace" class="row hover-fade">
         <div class="col-md-6">
@@ -22,7 +22,7 @@
     </div>
 
     <!-- Services -->
-    <div class="bubble standard-bubble-height col-md-5 col-sm-12 col-xs-12">
+    <div *ngIf="display.services" class="bubble standard-bubble-height col-md-5 col-sm-12 col-xs-12">
       <div class="inner">
         <!-- Header -->
         <div routerLink="/services" class="row hover-fade">
@@ -43,7 +43,7 @@
     </div>
 
     <!-- Processes -->
-    <div class="col-md-5 col-sm-12 col-xs-12">
+    <div *ngIf="display.processes" class="col-md-5 col-sm-12 col-xs-12">
       <div class="bubble">
         <div class="max-height-patch">
           <!-- Header -->

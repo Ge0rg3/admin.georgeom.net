@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { CookieService } from 'ngx-cookie';
 import { ApiService } from './api.service';
 
 @Injectable({
@@ -10,14 +9,13 @@ export class AuthService {
   private authenticated: boolean = false;
 
   constructor(
-    private cookieService: CookieService,
     private api: ApiService
     ) { }
 
   // Checks if authenticated
   public async check(): Promise<boolean> {
     // If we don't have a cookie, we aren't authenticated
-    let cookie = this.cookieService.get("token") || "";
+    let cookie = localStorage.getItem("token") || "";
     if (cookie.length == 0) {
       this.authenticated = false;
       return new Promise((res) => res(false))
@@ -31,17 +29,19 @@ export class AuthService {
   }
 
   // Attempts a login and returns true/false if login is successful
-  public async login(password: string): Promise<boolean> {
+  public async login(accesskey: string): Promise<boolean> {
     return this.api.post("/login", {
-      "password": password
+      "accesskey": accesskey
     }).then((result) => {
       if (result.status !== 200) {
         this.authenticated = false;
-        this.cookieService.remove("token");
+        localStorage.clear();
         return false;
       } else {
         this.authenticated = true;
-        this.cookieService.put("token", result.token);
+        localStorage.setItem("token", result.token);
+        localStorage.setItem("permission", result.permission);
+        localStorage.setItem("paths", JSON.stringify(result.paths));
         return true;
       }
     });
