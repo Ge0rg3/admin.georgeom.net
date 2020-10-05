@@ -49,6 +49,7 @@ export class ProcessChartComponent {
   }
 
   public updateChart(): void {
+    if (this.processes === undefined) return;
     // Update chart data
     this.filteredProcesses = this.processes.filter((res: { memory: number; }) => res.memory != 0);
     this.barChartLabels = this.filteredProcesses.map((res: { command: any; }) => res.command);

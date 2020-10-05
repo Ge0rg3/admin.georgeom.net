@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AppConfigService } from './app-config.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { CookieService } from 'ngx-cookie';
 import { Router } from "@angular/router";
 
 @Injectable({
@@ -12,7 +11,6 @@ export class ApiService {
   apiUrl: String;
 
   constructor(
-      private cookieService: CookieService,
       private http: HttpClient,
       private config: AppConfigService,
       private router: Router
@@ -22,7 +20,7 @@ export class ApiService {
 
   public getTokenHeaders(): HttpHeaders {
     const headers = new HttpHeaders({
-      "Token": this.cookieService.get("token") || ""
+      "Token": localStorage.getItem("token") || ""
     });
     return headers;
   }
@@ -41,7 +39,7 @@ export class ApiService {
     }).catch(err => {
       // If 401, logout
       if (err.status == 401) {
-        this.cookieService.remove("token");
+        localStorage.clear();
         this.router.navigate(["login"]);
       }
       return err.error;
@@ -63,7 +61,7 @@ export class ApiService {
     }).catch(err => {
       // If 401, logout
       if (err.status == 401) {
-        this.cookieService.remove("token");
+        localStorage.clear();
         this.router.navigate(["login"]);
       }
       return err.error;

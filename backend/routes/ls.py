@@ -16,7 +16,7 @@ LS_PARSER_REGEX = re.compile(r"""
     ^                       # Start of expression
     ([drwxtlsST!_\-]+)\s+   # File Permissions
     (\d+)\s+                # Number of links
-    (\w+)\s+                # Owner
+    ([^\s]+)\s+             # Owner
     (\w+)\s+                # Group
     (\d+)\s+                # Filesize
     ([\d-]+)\s+             # Date
