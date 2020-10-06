@@ -4,6 +4,9 @@ from flask import Flask, request, send_from_directory
 from flask_cors import CORS
 from variables import HOME_FILEPATH, PERMISSIONS
 
+# CONFIG
+KF2_ENABLED = True
+
 # Route imports
 from routes.auth import generate_auth_module
 from routes.ls import ls_module
@@ -11,6 +14,8 @@ from routes.services import services_module
 from routes.top import top_module
 from routes.sar import sar_module
 from routes.ufw import ufw_module
+if KF2_ENABLED:
+    from routes.kf2 import kf2_module
 
 # Setup flask app
 APP_ROOT = "/api"
@@ -39,6 +44,8 @@ app.register_blueprint(generate_auth_module(PERMISSIONS, ACCESS_TOKENS),
 app.register_blueprint(top_module, url_prefix=APP_ROOT)
 app.register_blueprint(sar_module, url_prefix=APP_ROOT)
 app.register_blueprint(ufw_module, url_prefix=APP_ROOT)
+if KF2_ENABLED:
+    app.register_blueprint(kf2_module, url_prefix=APP_ROOT)
 
 
 # Serve frontend & check auth on backend

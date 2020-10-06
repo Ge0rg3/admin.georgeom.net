@@ -105,12 +105,12 @@ COMMON_SERVICES = [
         "description": "KF2 gameserver at port 7777.",
         "status_mapping": [check_local_port, [7777]],
         "commands": {
-            "stop": [f"sudo {SU} - kf2server - " +
-                     "/home/kf2server/kf2server stop"],
-            "start": [f"sudo {SU} - kf2server - " +
-                      "/home/kf2server/kf2server start"],
-            "restart": [f"sudo {SU} - kf2server - " +
-                        "/home/kf2server/kf2server restart"],
+            "stop": [f"sudo {SU} kf2server -c \"" +
+                     "/home/kf2server/kf2server stop\""],
+            "start": [f"sudo {SU} kf2server -c \"" +
+                      "/home/kf2server/kf2server start\""],
+            "restart": [f"sudo {SU} kf2server -c \"" +
+                        "/home/kf2server/kf2server restart\""],
         }
     },
     {
@@ -119,12 +119,12 @@ COMMON_SERVICES = [
         "description": "Minecraft server at port 25565.",
         "status_mapping": [check_remote_port, [PUBLIC_SERVER_IP, 25565]],
         "commands": {
-            "stop": [f"sudo {SU} - mcserver - " +
-                     "/home/mcserver/mcserver stop"],
-            "start": [f"sudo {SU} - mcserver - " +
-                      "/home/mcserver/mcserver start"],
-            "restart": [f"sudo {SU} - mcserver - " +
-                        "/home/mcserver/mcserver restart"],
+            "stop": [f"sudo {SU} mcserver -c \"" +
+                     "/home/mcserver/mcserver stop\""],
+            "start": [f"sudo {SU} mcserver -c \"" +
+                      "/home/mcserver/mcserver start\""],
+            "restart": [f"sudo {SU} mcserver -c \"" +
+                        "/home/mcserver/mcserver restart\""],
         }
     },
     {
@@ -266,9 +266,7 @@ def changeCommonService(action, service_id):
     # Get service commands
     for service in COMMON_SERVICES:
         if service["id"] == service_id:
-            commands = []
-            for command in service["commands"][action]:
-                commands.append(command.split(" "))
+            commands = service["commands"][action]
             break
     else:
         return {
@@ -279,7 +277,7 @@ def changeCommonService(action, service_id):
     if len(commands) > 0:
         for command in commands:
             try:
-                sp.check_output(command, stderr=sp.STDOUT)
+                sp.check_output(["bash", "-c", command], stderr=sp.STDOUT)
             except sp.CalledProcessError as e:
                 return {
                     "status": 500,
