@@ -39,3 +39,8 @@ def getPermissions():
     return permissions
 
 PERMISSIONS = getPermissions()
+
+"""
+    Filepath of KF2 Config file
+"""
+KF2_DIRECTORY = "/home/kf2server/"

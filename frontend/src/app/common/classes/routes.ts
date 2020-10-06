@@ -1,4 +1,3 @@
-import { HomeComponent } from '../../pages/home/home.component';
 import { DiskspaceComponent } from '../../pages/diskspace/diskspace.component';
 import { ServicesComponent } from '../../pages/services/services.component';
 import { LoginComponent } from '../../pages/login/login.component';
@@ -6,13 +5,6 @@ import { ProcessesComponent } from '../../pages/processes/processes.component';
 import { FirewallComponent } from '../../pages/firewall/firewall.component';
 
 export const RoutesArray = [
-    {
-        "title": "Home",
-        "icon": "storage",
-        "link": "/home",
-        "baseapipath": "",
-        "component": HomeComponent
-    },
     {
         "title": "Login",
         "icon": "",
@@ -54,13 +46,13 @@ export const RoutesArray = [
         "icon": "whatshot",
         "link": "/kf2",
         "baseapipath": "/api/kf2",
-        "component": HomeComponent
+        "component": DiskspaceComponent
     },
     {
         "title": "MC Server",
         "icon": "public",
         "link": "/mc",
         "baseapipath": "/api/mc",
-        "component": HomeComponent
+        "component": DiskspaceComponent
     }
 ];
