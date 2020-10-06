@@ -5,6 +5,7 @@ import requests as rq
 import subprocess as sp
 from flask import Blueprint, request
 from variables import KF2_DIRECTORY
+from routes.services import check_local_port
 
 # Setup module
 kf2_module = Blueprint("kf2_module", __name__)
@@ -55,18 +56,22 @@ wave_lengths = {
     10: "Long"
 }
 
+# Check if server is up
+def checkServerStatus():
+    return check_local_port(7777)
+
 # Change game in config file. Validate data here, otherwise it's free rce
 def changeGameStartConfig(mode, difficulty, map_choice, game_length):
     map_choice = map_choice.upper()
     # Validate!
     if mode not in modes.keys():
-        return "Invalid mode"
+        return "Invalid mode."
     elif difficulty not in difficulties.keys():
-        return "Invalid difficulty"
+        return "Invalid difficulty."
     elif map_choice not in maps:
-        return "Invalid map"
+        return "Invalid map."
     elif game_length not in lengths.keys():
-        return "Invalid wave length"
+        return "Invalid game length."
     # Generate string
     launch_string = f"{map_choice}?Game={modes[mode]}?Difficulty={difficulties[difficulty]}?GameLength={game_length}"
     launch_string += "?ConfigSubDir=kf2server -QueryPort=27015"
@@ -124,16 +129,28 @@ def getCurrentGame():
 # Flask routes
 @kf2_module.route("/kf2/status", methods=["GET"])
 def getKf2Status():
+    # Get game data
     try:
         data = getCurrentGame()
     except:
-        return {
-            "status": 500,
-            "error": "An unknown error occurred."
-        }, 500
+        # Game probably restarting, if not then fuck
+        data = {
+            "server": "Restarting... Default shown",
+            "length": "Short",
+            "difficulty": "Suicidal",
+            "mode": "Survival",
+            "map": "KF-CATACOMBS",
+            "current_wave": "1"
+            }
+    server_status = checkServerStatus()
     return {
         "status": 200,
-        "results": data
+        "serverstatus": "on" if server_status else "off",
+        "currentgame": data if server_status else {},
+        "maps": maps,
+        "modes": list(modes.keys()),
+        "difficulties": list(difficulties.keys()),
+        "lengths": list(lengths.keys())
     }, 200
 
 @kf2_module.route("/kf2/change", methods=["POST"])
@@ -144,7 +161,7 @@ def changeKf2Game():
         if inp not in req.keys():
             return {
                 "status": 400,
-                "error": f"Missing required input {inp}"
+                "error": f"Missing required parameter '{inp}'."
             }, 400
     # Edit file
     message = changeGameStartConfig(req["mode"], req["difficulty"], req["map"], req["length"])

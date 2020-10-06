@@ -1,5 +1,12 @@
 <div protected class="container-fluid">
 
+  <!-- Welcome box -->
+  <div id="welcome" class="row bubble">
+    <div class="col-md-12">
+      <h3>Welcome, {{ permission }}.</h3>
+    </div>
+  </div>
+
   <!-- Row 1 -->
   <div class="row same-height center-row-items">
 
@@ -54,12 +61,32 @@
             <div class="col-md-1 col-md-offset-5 hidden-sm hidden-xs">
               <h3><i class="material-icons">launch</i></h3>
             </div>
+          </div>
+         <hr>
+          <!-- Chart -->
+          <process-chart [processes]="processes"></process-chart>
         </div>
-        <hr>
-        <!-- Chart -->
-        <process-chart [processes]="processes"></process-chart>
       </div>
     </div>
-  </div>
 
+    <!-- KF2 Details -->
+    <div *ngIf="display.kf2" class="col-md-5 col-sm-12 col-xs-12">
+      <div class="bubble">
+        <!-- Header -->
+        <div routerLink="/kf2" class="row hover-fade">
+          <div class="col-md-6">
+            <h3>Killing Floor 2</h3>
+          </div>
+          <div class="col-md-1 col-md-offset-5 hidden-sm hidden-xs">
+            <h3><i class="material-icons">launch</i></h3>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <kf2-rows [gamedetails]="gameinfo"></kf2-rows>
+        </div>
+      </div>
+    </div>
+
+  </div>
 </div>

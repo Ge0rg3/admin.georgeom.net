@@ -20,6 +20,8 @@ import { ProcessChartComponent } from './common/components/process-chart/process
 import { ProcessesComponent } from './pages/processes/processes.component';
 import { CpuUsageChartComponent } from './common/components/cpu-usage-chart/cpu-usage-chart.component';
 import { FirewallComponent } from './pages/firewall/firewall.component';
+import { KillingFloor2Component } from './pages/killingfloor2/killingfloor2.component';
+import { Kf2Rows } from './common/components/kf2-rows/kf2-rows.component';
 // Custom directives
 import { ProtectedDirective } from './common/directives/protected.directive';
 
@@ -32,12 +34,14 @@ import { ProtectedDirective } from './common/directives/protected.directive';
     DiskspaceComponent,
     ServicesComponent,
     ServiceRows,
+    Kf2Rows,
     LoginComponent,
     ProtectedDirective,
     ProcessChartComponent,
     ProcessesComponent,
     CpuUsageChartComponent,
-    FirewallComponent
+    FirewallComponent,
+    KillingFloor2Component
   ],
   imports: [
     BrowserModule,

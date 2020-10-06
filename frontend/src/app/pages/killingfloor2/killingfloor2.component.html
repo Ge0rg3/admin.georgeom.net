@@ -1,0 +1,136 @@
+<div protected class="container-fluid">
+
+  <!-- Header -->
+  <div class="bubble">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Killing Floor 2</h2>
+        </div>
+    </div>
+  </div>
+
+  <!-- Status -->
+  <div class="bubble">
+    <div id="on-off-row" class="row text-center">
+      <div class="col-lg-1 col-lg-offset-4 col-md-1 col-md-offset-4 col-sm-4 col-xs-4">
+        <h3>OFF</h3>
+      </div>
+      <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4">
+        <label class="switch push-down">
+          <input [(ngModel)]="enabled" (change)="true" type="checkbox">
+          <span class="slider round"></span>
+        </label>
+      </div>
+      <div class="col-lg-1 col-md-1 col-sm-4 col-xs-4">
+        <h3>ON</h3>
+      </div>
+    </div>
+  </div>
+
+  <!-- Row -->
+  <div class="row">
+    <!-- New game -->
+    <div class="col-md-5">
+      <div class="bubble">
+        <!-- Header -->
+        <div class="row">
+          <div class="col-md-12 real-mb-5">
+              <h3>Launch New Game</h3>
+          </div>
+          <hr>
+        </div>
+        <!-- Game Options -->
+        <div class="row">
+          <div class="col-md-11 col-centered">
+            <!-- Map -->
+            <div class="form-group">
+              <label for="mapinput">Map</label>
+              <select [(ngModel)]="gameInput.map" class="form-control" id="mapinput">
+                <option *ngFor="let map of maps" [value]="map">{{ map }}</option>
+              </select>
+            </div>
+            <!-- Gamemode -->
+            <div class="form-group">
+              <label for="modeinput">Gametype</label>
+              <select [(ngModel)]="gameInput.mode" class="form-control" id="modeinput">
+                <option *ngFor="let mode of modes" [value]="mode">{{ mode }}</option>
+              </select>
+            </div>
+            <!-- Difficulty -->
+            <div class="form-group">
+              <label for="modeinput">Difficulty</label>
+              <select [(ngModel)]="gameInput.difficulty" class="form-control" id="modeinput">
+                <option *ngFor="let difficulty of difficulties" [value]="difficulty">{{ difficulty }}</option>
+              </select>
+            </div>
+            <!-- Length -->
+            <div class="form-group">
+              <label for="modeinput">Length</label>
+              <select [(ngModel)]="gameInput.length" class="form-control" id="modeinput">
+                <option *ngFor="let len of lengths" [value]="len">{{ len }}</option>
+              </select>
+            </div>
+            <!-- Submit -->
+            <div class="col-md-12 text-center">
+              <button (click)="launchGame()" type="button" class="start-btn btn btn-primary">Launch</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Current/Previous game box -->
+    <div class="col-md-5">
+      <div class="bubble">
+        <!-- Header -->
+        <div class="row">
+          <div class="col-md-12 real-mb-5">
+              <h3>{{ enabled ? 'Current' : 'Previous'}} Game</h3>
+          </div>
+          <hr>
+        </div>
+        <!-- Details -->
+        <div class="details">
+          <kf2-rows [gamedetails]="currentGame"></kf2-rows>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+</div>
+
+<!-- Launch Game Button -->
+<button #launchModalTrigger class="d-none" data-toggle="modal" data-target="#launchModal">
+  <!-- Does not appear on page -->
+</button>
+
+<!-- Launch game modal -->
+<div class="modal fade" id="launchModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-body text-center">
+
+            <!-- Confirmation prompt -->
+            <h5>Starting new game...</h5>
+
+            <!-- Loading box -->
+            <div *ngIf="loadingGame">
+              <img src="/assets/loading.gif" width="50">
+            </div>
+
+            <!-- Error message -->
+            <div class="mt-10-px" *ngIf="launchError != ''">
+              <span class="fail">An error occurred: test</span>
+            </div>
+
+          </div>
+
+          <div class="modal-footer">
+              <button #closeLaunchModalClose type="button" class="btn btn-primary" data-toggle="modal" data-target="#launchModal">Close</button>
+          </div>
+
+      </div>
+  </div>
+</div>

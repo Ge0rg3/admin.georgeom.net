@@ -9,6 +9,7 @@ import { TopService } from 'src/app/common/services/top.service';
 import { ServicesService } from 'src/app/common/services/services.service';
 import { LsService } from 'src/app/common/services/ls.service';
 import { RoutesArray } from 'src/app/common/classes/routes';
+import { Kf2ApiService } from 'src/app/common/services/kf2.service';
 
 @Component({
   selector: 'app-home',
@@ -28,27 +29,35 @@ export class HomeComponent implements OnInit {
   public display: any = {
     "diskspace": false,
     "services": false,
-    "processes": false
+    "processes": false,
+    "kf2": false
   }
+
+  public permission: string = "";
+
+  public gameinfo: any = {};
 
   constructor(
     private utils: UtilsService,
     private topService: TopService,
     private servicesApi: ServicesService,
-    private lsApi: LsService
+    private lsApi: LsService,
+    private kf2api: Kf2ApiService
   ) { }
 
   ngOnInit(): void {
+    // Get permission name
+    this.permission = localStorage.getItem("permission");
     // Check permissions for widgets
     let routes = RoutesArray;
     let permittedpaths = JSON.parse(localStorage.getItem("paths"));
     for (let path of permittedpaths) {
-      if (path == "/") {
+      if ("/".startsWith(path)) {
         this.display.diskspace = true;
         this.display.services = true;
         this.display.processes = true;
       }
-      else if (path == "/api/kf2") {
+      if ("/api/kf2".startsWith(path)) {
         this.display.kf2 = true;
       }
     }
@@ -74,6 +83,14 @@ export class HomeComponent implements OnInit {
     if (this.display.diskspace) {
       this.getDiskspace(this.diskspacePath);
     }
+    // KF2 game details
+    if (this.display.kf2) {
+      this.kf2api.getKf2Status().then((response) => {
+        if (response.status == 200) {
+          this.gameinfo = response.currentgame;
+        }
+      })
+    }
   }
   
 
@@ -85,7 +102,7 @@ export class HomeComponent implements OnInit {
         this.diskspaceFiles = response.results;
       }
     })
-    
+
   }
 
 }

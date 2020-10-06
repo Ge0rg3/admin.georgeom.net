@@ -1,0 +1,36 @@
+// Push down 20 px
+.push-down {
+  margin-top: 20px;
+}
+
+// Padd out on off switch bubble
+#on-off-row {
+  padding-bottom: 0.5%;
+}
+
+// Smaller hrs (makes bubbles look more padded without forcing text in)
+hr {
+  width: 90%;
+}
+
+// Push bubble headers in
+h3 {
+  padding-left: 3%;
+}
+
+// Make start game button fairly wide
+.start-btn {
+  width: 75%;
+  margin-top: 2px;
+  margin-bottom: 10px;
+}
+
+// Center cols in row
+.col-centered {
+  float: none;
+  margin: 0 auto;
+}
+
+.details {
+  margin-left: 1%;
+}

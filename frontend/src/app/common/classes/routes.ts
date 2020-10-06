@@ -3,6 +3,7 @@ import { ServicesComponent } from '../../pages/services/services.component';
 import { LoginComponent } from '../../pages/login/login.component';
 import { ProcessesComponent } from '../../pages/processes/processes.component';
 import { FirewallComponent } from '../../pages/firewall/firewall.component';
+import { KillingFloor2Component } from 'src/app/pages/killingfloor2/killingfloor2.component';
 
 export const RoutesArray = [
     {
@@ -46,7 +47,7 @@ export const RoutesArray = [
         "icon": "whatshot",
         "link": "/kf2",
         "baseapipath": "/api/kf2",
-        "component": DiskspaceComponent
+        "component": KillingFloor2Component
     },
     {
         "title": "MC Server",

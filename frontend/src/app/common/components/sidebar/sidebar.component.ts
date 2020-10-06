@@ -11,14 +11,15 @@ import { RoutesArray } from '../../classes/routes';
 export class SidebarComponent implements OnInit {
 
   public sidebarItems: any = [];
-  public permission: string;
 
-  constructor(private router: Router, private authService: AuthService) { }
+  constructor(
+    private router: Router,
+    private authService: AuthService
+    ) { }
 
   ngOnInit(): void {
     let items = RoutesArray;
     this.sidebarItems = items;
-    this.permission = localStorage.getItem("permission");
   }
 
   // Navigates to another page
@@ -48,5 +49,4 @@ export class SidebarComponent implements OnInit {
     }
     return permitted;
   }
-
 }
