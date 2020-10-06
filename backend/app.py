@@ -36,6 +36,9 @@ ACCESS_TOKENS = [
      } for permission in PERMISSIONS
 ]
 
+# Api endpoints that work without any auth
+permitted_paths = ["/api/login", "/api"]
+
 # Add routes
 app.register_blueprint(ls_module, url_prefix=APP_ROOT)
 app.register_blueprint(services_module, url_prefix=APP_ROOT)
@@ -66,7 +69,7 @@ def before_request():
     Authenticate API requests
     """
     # If attempting to login, continue
-    if request.path == "/api/login" or request.method == "OPTIONS":
+    if request.path in permitted_paths or request.method == "OPTIONS":
         return
     # Otherwise, auth token required
     token_header = request.headers.get("Token") or ""
