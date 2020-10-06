@@ -6,7 +6,8 @@ import { Component, Input, SimpleChanges } from '@angular/core';
   styleUrls: ['kf2-rows.component.scss']
 })
 export class Kf2Rows {
-  @Input() gamedetails: boolean = true;
+  @Input() gamedetails: any = {};
+  @Input() status: boolean;
 
   constructor() { }
 

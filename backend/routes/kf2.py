@@ -5,7 +5,7 @@ import requests as rq
 import subprocess as sp
 from flask import Blueprint, request
 from variables import KF2_DIRECTORY
-from routes.services import check_local_port
+from routes.services import check_local_port, changeCommonService
 
 # Setup module
 kf2_module = Blueprint("kf2_module", __name__)
@@ -146,7 +146,7 @@ def getKf2Status():
     return {
         "status": 200,
         "serverstatus": "on" if server_status else "off",
-        "currentgame": data if server_status else {},
+        "currentgame": data,
         "maps": maps,
         "modes": list(modes.keys()),
         "difficulties": list(difficulties.keys()),
@@ -182,3 +182,16 @@ def changeKf2Game():
                 "status": 500,
                 "error": "Config changed, but server could not be restarted at this time."
             }, 500
+
+# Disable KF2
+@kf2_module.route("/kf2/disable", methods=["GET"])
+def disableKf2Server():
+    if checkServerStatus():
+        return changeCommonService("stop", "kf2-game")
+
+# Enable KF2
+@kf2_module.route("/kf2/enable", methods=["GET"])
+def enableKf2Server():
+    if not checkServerStatus():
+        return changeCommonService("start", "kf2-game")
+

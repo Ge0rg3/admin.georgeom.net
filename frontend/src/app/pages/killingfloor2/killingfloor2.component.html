@@ -17,7 +17,7 @@
       </div>
       <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4">
         <label class="switch push-down">
-          <input [(ngModel)]="enabled" (change)="true" type="checkbox">
+          <input [(ngModel)]="enabled" (change)="toggleServer()" type="checkbox">
           <span class="slider round"></span>
         </label>
       </div>
@@ -102,7 +102,7 @@
 </div>
 
 <!-- Launch Game Button -->
-<button #launchModalTrigger class="d-none" data-toggle="modal" data-target="#launchModal">
+<button #modalTrigger class="d-none" data-toggle="modal" data-target="#launchModal">
   <!-- Does not appear on page -->
 </button>
 
@@ -113,22 +113,22 @@
           <div class="modal-body text-center">
 
             <!-- Confirmation prompt -->
-            <h5>Starting new game...</h5>
+            <h5>{{ modalMessage }}</h5>
 
             <!-- Loading box -->
-            <div *ngIf="loadingGame">
+            <div *ngIf="modalLoading">
               <img src="/assets/loading.gif" width="50">
             </div>
 
             <!-- Error message -->
-            <div class="mt-10-px" *ngIf="launchError != ''">
-              <span class="fail">An error occurred: test</span>
+            <div class="mt-10-px" *ngIf="modalError != ''">
+              <span class="fail">An error occurred: modalError</span>
             </div>
 
           </div>
 
           <div class="modal-footer">
-              <button #closeLaunchModalClose type="button" class="btn btn-primary" data-toggle="modal" data-target="#launchModal">Close</button>
+              <button #closeModal type="button" class="btn btn-primary" data-toggle="modal" data-target="#launchModal">Close</button>
           </div>
 
       </div>

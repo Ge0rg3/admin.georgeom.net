@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Kf2ApiService } from 'src/app/common/services/kf2.service';
+import { interval } from 'rxjs';
 
 @Component({
   selector: 'app-killingfloor2',
@@ -9,10 +10,11 @@ import { Kf2ApiService } from 'src/app/common/services/kf2.service';
 export class KillingFloor2Component implements OnInit {
 
   // Modal
-  @ViewChild("launchModalTrigger") launchModalTrigger;
-  @ViewChild("closeLaunchModalClose") closeLaunchModalClose;
-  public loadingGame: boolean = false;
-  public launchError: string = "";
+  @ViewChild("modalTrigger") modalTrigger;
+  @ViewChild("closeModal") closeModal;
+  public modalLoading: boolean = false;
+  public modalError: string = "";
+  public modalMessage: string = "";
 
   // Current kf2 server status
   public enabled: boolean = false;
@@ -37,6 +39,9 @@ export class KillingFloor2Component implements OnInit {
     "length": ""
   }
 
+  // Repeat API call regularly
+  public timer: any;
+
   constructor(private kf2api: Kf2ApiService) { }
 
   ngOnInit(): void {
@@ -49,6 +54,9 @@ export class KillingFloor2Component implements OnInit {
     }
     // Get server and game details
     this.updateCurrentGame(true);
+    this.timer = interval(2500).subscribe((n) => {
+      this.updateCurrentGame(false);
+    })
   }
 
   // Get latest server status
@@ -75,19 +83,43 @@ export class KillingFloor2Component implements OnInit {
     })
   }
 
+  // Launch a new game
   public launchGame(): void {
-    this.launchModalTrigger.nativeElement.click();
-    this.loadingGame = true;
-    this.launchError = "";
+    this.modalLoading = true;
+    this.modalError = "";
+    this.modalMessage = "Starting new game...";
+    this.modalTrigger.nativeElement.click();
     this.kf2api.startGame(this.gameInput).then((response) => {
       this.updateCurrentGame(false);
-      this.loadingGame = false;
+      this.modalLoading = false;
       if (response.status === 200) {
-        this.closeLaunchModalClose.nativeElement.click();
+        this.closeModal.nativeElement.click();
       } else {
-        this.launchError = response.error;
+        this.modalError = response.error;
       }
     });
+  }
+  
+  // Turn server on/off
+  public toggleServer(): void {
+    let change = this.enabled;
+    // Trigger modal
+    this.modalLoading = true;
+    this.modalError = "";
+    this.modalMessage = (change ? "Starting" : "Stopping") + " server...";
+    this.modalTrigger.nativeElement.click();
+    // Send API call
+    this.kf2api[change ? "enable" : "disable"]().then((response) => {
+      this.updateCurrentGame(false);
+      this.modalLoading = false;
+      if (response.status == 200) {
+        this.closeModal.nativeElement.click();
+      }
+      else {
+        this.modalError = response.error;
+      }
+    })
+    
   }
 
 }

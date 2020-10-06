@@ -18,14 +18,18 @@ import { Kf2ApiService } from 'src/app/common/services/kf2.service';
 })
 export class HomeComponent implements OnInit {
 
+  // Process bubble
   public processes: any[];
 
+  // Service bubble
   public services: any[];
   public servicesLoading: boolean = false;
 
+  // Diskspace bubble
   public diskspaceFiles: any[];
   public diskspacePath: string = "/";
 
+  // Which bubbles to display
   public display: any = {
     "diskspace": false,
     "services": false,
@@ -33,9 +37,12 @@ export class HomeComponent implements OnInit {
     "kf2": false
   }
 
+  // welcome message
   public permission: string = "";
 
+  // Kf2 bubble
   public gameinfo: any = {};
+  public kf2status: boolean;
 
   constructor(
     private utils: UtilsService,
@@ -88,6 +95,7 @@ export class HomeComponent implements OnInit {
       this.kf2api.getKf2Status().then((response) => {
         if (response.status == 200) {
           this.gameinfo = response.currentgame;
+          this.kf2status = response.serverstatus === "on";
         }
       })
     }

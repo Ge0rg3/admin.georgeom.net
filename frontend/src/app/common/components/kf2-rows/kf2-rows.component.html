@@ -1,3 +1,6 @@
+<p *ngIf="status !== undefined">
+    Status:&nbsp;{{ status ? 'On' : 'Off' }}
+</p>
 <p>Name:&nbsp;<code>{{ gamedetails.server != '' ? gamedetails.server : 'N/A'}}</code></p>
 <p>Map:&nbsp;<code>{{ gamedetails.map }}</code></p>
 <p>Length:&nbsp;<code>{{ gamedetails.length }}</code></p>
