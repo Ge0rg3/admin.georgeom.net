@@ -25,6 +25,15 @@ h3 {
   margin-bottom: 10px;
 }
 
+.add-me {
+  .btn {
+    margin-bottom: 15px;
+  }
+  hr {
+    width: 10%;
+  }
+}
+
 // Center cols in row
 .col-centered {
   float: none;
@@ -33,4 +42,10 @@ h3 {
 
 .details {
   margin-left: 1%;
+}
+
+.ip-entries {
+  hr {
+    width: 10%;
+  }
 }

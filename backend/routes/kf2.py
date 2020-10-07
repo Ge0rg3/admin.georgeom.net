@@ -120,6 +120,8 @@ def getCurrentGame():
     game_length = int(current_game["length"])
     if game_length != 0:
         current_game["length"] = wave_lengths[int(current_game["length"])]
+    elif game_length == 254:
+        current_game["length"] = "Endless (254 waves)"
     else:
         current_game["length"] = "N/A"
     # Return details
