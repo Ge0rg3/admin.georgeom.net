@@ -113,28 +113,21 @@
           </div>
           <!-- Add me! -->
           <div class="add-me">
-            <div class="col-md-12 text-center">
-              <button type="button" class="btn btn-primary">Add me!</button>
+            <div class="col-md-12">
+              <div class="row text-center button-group">
+                <button (click)="openAddIpBox()" type="button" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 btn btn-primary">Add IP</button>
+                &nbsp;
+                <button (click)="addMe()" [disabled]="ipExists" type="button" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 btn btn-primary">Add me</button>
+              </div>
             </div>
             <hr>
           </div>
           <!-- Current entries -->
           <div class="ip-entries text-center">
-            <p>1.2.3.4</p>
-            <hr>
-            <p>1.2.3.4</p>
-            <hr>
-            <p>1.2.3.4</p>
-            <hr>
-            <p>1.2.3.4</p>
-            <hr>
-            <p>1.2.3.4</p>
-            <hr>
-            <p>1.2.3.4</p>
-            <hr>
-            <p>1.2.3.4</p>
-            <hr>
-            <p>1.2.3.4</p>
+            <ng-container *ngFor="let ip of whitelist; let i = index">
+              <p (click)="removeIpFromWhitelist(ip)" class="d-inline">{{ ip }}</p>
+              <hr *ngIf="i != whitelist.length - 1">
+            </ng-container>
           </div>
         </div>
 
@@ -142,14 +135,12 @@
     </div>
   </div>
 
-
 </div>
 
 <!-- Launch Game Button -->
 <button #modalTrigger class="d-none" data-toggle="modal" data-target="#launchModal">
   <!-- Does not appear on page -->
 </button>
-
 <!-- Launch game modal -->
 <div class="modal fade" id="launchModal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
@@ -166,13 +157,52 @@
 
             <!-- Error message -->
             <div class="mt-10-px" *ngIf="modalError != ''">
-              <span class="fail">An error occurred: modalError</span>
+              <span class="fail">An error occurred: {{ modalError }}</span>
             </div>
 
           </div>
 
           <div class="modal-footer">
               <button #closeModal type="button" class="btn btn-primary" data-toggle="modal" data-target="#launchModal">Close</button>
+          </div>
+
+      </div>
+  </div>
+</div>
+
+<!-- Add IP Button -->
+<button #addIpModalTrigger class="d-none" data-toggle="modal" data-target="#addIpLaunchModal">
+  <!-- Does not appear on page -->
+</button>
+<!-- Add IP modal -->
+<div class="modal fade" id="addIpLaunchModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-body text-center">
+
+            <div *ngIf="!modalLoading">
+              <!-- Add box -->
+              <h5>Enter IP:</h5>
+              <div class="input-group col-centered">
+                <input [(ngModel)]="ipInput" type="text" class="form-control" placeholder="192.168.1.1">
+              </div>
+              <button (click)="addWhitelistIp()" type="button" class="btn btn-success">Add</button>
+            </div>
+
+            <!-- Loading box -->
+            <div *ngIf="modalLoading">
+              <img src="/assets/loading.gif" width="50">
+            </div>
+
+            <!-- Error message -->
+            <div class="mt-10-px" *ngIf="modalError != ''">
+              <span class="fail">An error occurred: {{ modalError }}</span>
+            </div>
+
+          </div>
+
+          <div class="modal-footer">
+              <button #addIpCloseModal type="button" class="btn btn-primary" data-toggle="modal" data-target="#addIpLaunchModal">Close</button>
           </div>
 
       </div>

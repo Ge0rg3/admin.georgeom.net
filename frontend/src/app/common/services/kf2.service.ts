@@ -26,4 +26,20 @@ export class Kf2ApiService {
     return this.api.get("/kf2/disable");
   }
 
+  public async getWhitelist() {
+    return this.api.get("/kf2/whitelist");
+  }
+
+  public async addIpToWhitelist(ip) {
+    return this.api.post("/kf2/whitelist/add", {
+      "ip": ip
+    });
+  }
+
+  public async removeIpFromWhitelist(ip) {
+    return this.api.post("/kf2/whitelist/remove", {
+      "ip": ip
+    });
+  }
+
 }

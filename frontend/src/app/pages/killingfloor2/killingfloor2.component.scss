@@ -27,11 +27,16 @@ h3 {
 
 .add-me {
   .btn {
-    margin-bottom: 15px;
+    float:none;
+    margin: auto;
   }
   hr {
     width: 10%;
   }
+}
+
+.button-group {
+  margin-bottom: 4%;
 }
 
 // Center cols in row
@@ -48,4 +53,15 @@ h3 {
   hr {
     width: 10%;
   }
+  p {
+    margin: 0;
+  }
+  p:hover {
+    text-decoration: line-through;
+    cursor: pointer;
+  }
+}
+
+.input-group {
+  margin-bottom: 1%;
 }

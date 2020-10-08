@@ -4,7 +4,7 @@
 import requests as rq 
 import subprocess as sp
 from flask import Blueprint, request
-from variables import KF2_DIRECTORY
+from variables import KF2_DIRECTORY, KF2_NGINX_PATH
 from routes.services import check_local_port, changeCommonService
 
 # Setup module
@@ -14,6 +14,13 @@ kf2_module = Blueprint("kf2_module", __name__)
 def read_file(path):
     with open(path, "r") as f:
         return f.read()
+
+# Helper func for getting request IP
+def get_request_ip(req):
+    ip = req.headers.get("Cf-Connecting-Ip", "")
+    if ip == "" or req.remote_addr != "127.0.0.1":
+        ip = req.remote_addr
+    return ip
 
 # Vars
 if KF2_DIRECTORY[-1] != "/":
@@ -128,6 +135,48 @@ def getCurrentGame():
     return current_game
 
 
+# Parse whitelist file to get current whitelist
+def getCurrentWhitelist():
+    kf2_nginx = read_file(KF2_NGINX_PATH).strip().split("\n")[2:-1]
+    ips = []
+    for line in kf2_nginx:
+        ips.append(line.split("\t")[1])
+    return ips
+
+# Write an array of IPs to whitelist file
+def writeIpsToWhitelist(ips):
+    lines = ["map $http_cf_connecting_ip $kf2_allowed {", "\tdefault\t0;"]
+    for ip in ips:
+        lines.append("\t" + ip + "\t1;")
+    lines.append("}")
+    # Likely do not have permission to write directly to nginx config files
+    # ... so we write to a /tmp file and copy it over
+    with open("/tmp/kf2-nginx.conf", "w") as f:
+        f.write("\n".join(lines))
+    sp.check_output(["bash", "-c", f"sudo cp /tmp/kf2-nginx.conf {KF2_NGINX_PATH}"])
+    try:
+        sp.check_output(["bash", "-c", "sudo /etc/init.d/nginx reload"])
+        return True
+    except:
+        return False
+
+# Remove IP from nginx config
+def removeIpFromWhitelist(del_ip):
+    ips = [ip for ip in getCurrentWhitelist() if ip != del_ip]
+    writeIpsToWhitelist(ips)
+
+# Add a new IP to the whitelist
+def addIpToWhitelist(ip):
+    ips = getCurrentWhitelist()
+    if ip not in ips:
+        ips.append(ip)
+    success = writeIpsToWhitelist(ips)
+    if success:
+        return True
+    else:
+        removeIpFromWhitelist(ip)
+        return False
+
 # Flask routes
 @kf2_module.route("/kf2/status", methods=["GET"])
 def getKf2Status():
@@ -197,3 +246,63 @@ def enableKf2Server():
     if not checkServerStatus():
         return changeCommonService("start", "kf2-game")
 
+
+@kf2_module.route("/kf2/whitelist")
+def getWhitelistRoute():
+    ips = getCurrentWhitelist()
+    return {
+        "status": 200,
+        "user_ip": get_request_ip(request),
+        "ips": ips
+    }, 200
+
+@kf2_module.route("/kf2/whitelist/add", methods=["POST"])
+def addWhitelistRoute():
+    # Validate
+    req = request.json
+    if "ip" not in req.keys():
+        return {
+            "status": 400,
+            "error": "Missing required parameter 'ip'."
+        }, 400
+    ip = req["ip"]
+    # Allow "me" to add user IP
+    if ip == "me":
+        ip = get_request_ip(request)
+    # Check ip contains ipv4/ipv6 chars
+    is_ip = True
+    for char in ip:
+        if char not in "0123456789abcdef:.":
+            is_ip = False
+    if not is_ip:
+        return {
+            "status": 400,
+            "error": "Invalid IP."
+        }, 400
+    # Add
+    success = addIpToWhitelist(ip)
+    if success:
+        return {
+            "status": 200,
+        }, 200
+    else:
+        return {
+            "status": 400,
+            "error": "Invalid IP."
+        }
+
+@kf2_module.route("/kf2/whitelist/remove", methods=["POST"])
+def removeWhitelistRoute():
+    # Validate
+    req = request.json
+    if "ip" not in req.keys():
+        return {
+            "status": 400,
+            "error": "Missing required parameter 'ip'."
+        }, 400
+    ip = req["ip"]
+    # Remove
+    removeIpFromWhitelist(ip)
+    return {
+        "status": 200
+    }, 200

@@ -41,6 +41,7 @@ def getPermissions():
 PERMISSIONS = getPermissions()
 
 """
-    Filepath of KF2 Config file
+    Filepath of KF2 Config files
 """
 KF2_DIRECTORY = "/home/kf2server/"
+KF2_NGINX_PATH = "/etc/nginx/kf2-allow.conf"

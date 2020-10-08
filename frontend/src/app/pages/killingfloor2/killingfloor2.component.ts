@@ -12,9 +12,18 @@ export class KillingFloor2Component implements OnInit {
   // Modal
   @ViewChild("modalTrigger") modalTrigger;
   @ViewChild("closeModal") closeModal;
+  @ViewChild("addIpModalTrigger") addIpModalTrigger;
+  @ViewChild("addIpCloseModal") addIpCloseModal;
   public modalLoading: boolean = false;
   public modalError: string = "";
   public modalMessage: string = "";
+  public ipInput: string = "";
+
+  // Display trash icons when hovering over whitelist IPs
+  public displayTrash: any = {};
+
+  // Only show "Add me" whitelist button if user ip not in list
+  public ipExists: boolean = false;
 
   // Current kf2 server status
   public enabled: boolean = false;
@@ -24,6 +33,9 @@ export class KillingFloor2Component implements OnInit {
 
   // Public current settings
   public currentGame: any = {}
+
+  // Whitelisted ips
+  public whitelist: number[] = [];
 
   // Game settings sent from API
   public maps: string[] = [];
@@ -39,8 +51,9 @@ export class KillingFloor2Component implements OnInit {
     "length": ""
   }
 
-  // Repeat API call regularly
-  public timer: any;
+  // Repeat API calls regularly
+  public gameTimer: any;
+  public whitelistTimer: any;
 
   constructor(private kf2api: Kf2ApiService) { }
 
@@ -54,8 +67,13 @@ export class KillingFloor2Component implements OnInit {
     }
     // Get server and game details
     this.updateCurrentGame(true);
-    this.timer = interval(2500).subscribe((n) => {
+    this.gameTimer = interval(2500).subscribe((n) => {
       this.updateCurrentGame(false);
+    })
+    // Update whitelist semi-regularly
+    this.updateWhitelist();
+    this.whitelistTimer = interval(10000).subscribe((n) => {
+      this.updateWhitelist();
     })
   }
 
@@ -118,8 +136,57 @@ export class KillingFloor2Component implements OnInit {
       else {
         this.modalError = response.error;
       }
+    }) 
+  }
+
+  // Update IP whitelist
+  public updateWhitelist(): void {
+    this.kf2api.getWhitelist().then((response) => {
+      if (response.status === 200) {
+        this.whitelist = response.ips;
+        this.ipExists = response.ips.indexOf(response.user_ip) != -1;
+      }
     })
-    
+  }
+
+  // Add our own IP to the whitelist
+  public addMe(): void {
+    this.kf2api.addIpToWhitelist("me").then((response) => {
+      if (response.status === 200) {
+        this.updateWhitelist();
+      }
+    })
+  }
+
+  // Remove a given IP from a whitelist
+  public removeIpFromWhitelist(ip: string): void {
+    this.kf2api.removeIpFromWhitelist(ip).then((response) => {
+      if (response.status === 200) {
+        this.updateWhitelist();
+      }
+    })
+  }
+
+  // Open "Add IP" modal
+  public openAddIpBox(): void {
+    this.modalError = "";
+    this.ipInput = "";
+    this.modalLoading = false;
+    this.addIpModalTrigger.nativeElement.click();
+  }
+
+  // Add an IP to the KF2 whitelist
+  public addWhitelistIp(): void {
+    this.modalError = "";
+    this.modalLoading = true;
+    this.kf2api.addIpToWhitelist(this.ipInput).then((response) => {
+      this.modalLoading = false;
+      if (response.status === 200) {
+        this.addIpCloseModal.nativeElement.click();
+      } else {
+        this.modalError = response.error;
+      }
+    })
   }
 
 }
