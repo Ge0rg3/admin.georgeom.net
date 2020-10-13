@@ -81,7 +81,7 @@ def changeGameStartConfig(mode, difficulty, map_choice, game_length):
         return "Invalid game length."
     # Generate string
     launch_string = f"{map_choice}?Game={modes[mode]}?Difficulty={difficulties[difficulty]}?GameLength={game_length}"
-    launch_string += "?ConfigSubDir=kf2server?Mutator=DamageDisplay.DmgMut,ClassicScoreboard.ClassicSCMut -QueryPort=27015"
+    launch_string += "?ConfigSubDir=kf2server?Mutator=DamageDisplay.DmgMut -QueryPort=27015"
     new_line = f'\tparms="{launch_string}"'
     # Insert into file
     new_config = []
@@ -125,12 +125,12 @@ def getCurrentGame():
     current_game["difficulty"] = list(difficulties.keys())[int(current_game["difficulty"])]
     # Turn number of waves into wave length string (i.e. 4 -> Short
     game_length = int(current_game["length"])
-    if game_length != 0:
-        current_game["length"] = wave_lengths[int(current_game["length"])]
-    elif game_length == 254:
+    if game_length == 254:
         current_game["length"] = "Endless (254 waves)"
-    else:
+    elif game_length == 0:
         current_game["length"] = "N/A"
+    else:
+        current_game["length"] = wave_lengths[int(current_game["length"])]
     # Return details
     return current_game
 
