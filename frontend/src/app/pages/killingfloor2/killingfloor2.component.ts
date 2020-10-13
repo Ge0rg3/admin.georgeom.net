@@ -193,4 +193,10 @@ export class KillingFloor2Component implements OnInit {
     })
   }
 
+  // End API calls when leaving task page
+  ngOnDestroy(): void {
+    if (this.gameTimer) this.gameTimer.unsubscribe();
+    if (this.whitelistTimer) this.whitelistTimer.unsubscribe();
+  }
+
 }
