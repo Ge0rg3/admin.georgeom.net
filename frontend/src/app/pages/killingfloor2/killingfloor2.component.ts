@@ -90,8 +90,12 @@ export class KillingFloor2Component implements OnInit {
         if (updateLaunchOptions) {
           this.gameInput.mode = response.currentgame.mode;
           this.gameInput.difficulty = response.currentgame.difficulty;
-          this.gameInput.length = response.currentgame.length;
           this.gameInput.map = response.currentgame.map;
+          if (response.currentgame.length == "Endless (254 waves)") {
+            this.gameInput.length = "Long";
+          } else {
+            this.gameInput.length = response.currentGame.length;
+          }
         }
         
         // Change on/off toggle and update current game
