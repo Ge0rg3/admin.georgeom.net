@@ -81,7 +81,7 @@ def changeGameStartConfig(mode, difficulty, map_choice, game_length):
         return "Invalid game length."
     # Generate string
     launch_string = f"{map_choice}?Game={modes[mode]}?Difficulty={difficulties[difficulty]}?GameLength={game_length}"
-    launch_string += "?ConfigSubDir=kf2server?Mutator=DamageDisplay.DmgMut -QueryPort=27015"
+    launch_string += "?Mutator=DamageDisplay.DmgMut?ConfigSubDir=kf2server -QueryPort=27015"
     new_line = f'\tparms="{launch_string}"'
     # Insert into file
     new_config = []

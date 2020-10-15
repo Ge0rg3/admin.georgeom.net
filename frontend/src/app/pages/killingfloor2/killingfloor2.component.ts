@@ -94,7 +94,7 @@ export class KillingFloor2Component implements OnInit {
           if (response.currentgame.length == "Endless (254 waves)") {
             this.gameInput.length = "Long";
           } else {
-            this.gameInput.length = response.currentGame.length;
+            this.gameInput.length = response.currentgame.length;
           }
         }
         
