@@ -33,6 +33,7 @@ lgsm_config_path = KF2_DIRECTORY + "lgsm/config-lgsm/kf2server/common.cfg"
 kf2_log_path = KF2_DIRECTORY + "serverfiles/KFGame/Logs/Launch.log"
 
 maps = read_file(kfgame_path).split('GameMapCycles=(Maps=("')[1].upper().split('"))')[0].split('","')
+maps.sort()
 
 restart_server_command = 'sudo /usr/bin/su kf2server -c "/home/kf2server/kf2server restart"'
 
