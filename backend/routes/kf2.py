@@ -98,11 +98,11 @@ def changeGameStartConfig(mode, difficulty, map_choice, game_length):
     return "ok"
 
 # Get details of ongoing game from launch log (idk where else to check it)
-def getCurrentGame():
+def getCurrentGame(previous=1):
     # Get advert broadcast from log
     log = read_file(kf2_log_path)
     adverts = log.split("Refreshing published game settings")
-    recent_advert = adverts[-1].split("\n")
+    recent_advert = adverts[-previous].split("\n")
     # Parse and find details
     current_game = {}
     for line in recent_advert:
@@ -180,13 +180,17 @@ def addIpToWhitelist(ip):
 # Flask routes
 @kf2_module.route("/kf2/status", methods=["GET"])
 def getKf2Status():
-    # Get game data
+    # Get game data. First get most recent, but if cut off early, get second-most recent.
+    # If still not working, show default as error.
     try:
-        data = getCurrentGame()
+        try:
+            data = getCurrentGame(1)
+        except:
+            data = getCurrentGame(2)
     except:
         # Game probably restarting, if not then fuck
         data = {
-            "server": "Restarting... Default shown",
+            "server": "Restarting... Default shown.",
             "length": "Short",
             "difficulty": "Suicidal",
             "mode": "Survival",
